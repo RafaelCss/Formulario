@@ -1,9 +1,8 @@
 import { LoadingOutlined, SmileOutlined, SolutionOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, message, Steps } from 'antd';
 import { useState } from 'react';
-import { Conteudo, Isteps } from '../../Util/Interfaces/Isteps';
 import S from '../../Util/Styles/style';
-import FormCadastro from '../Entidades/Cadastro/indext';
+import FormCadastro from '../Entidades/Cadastro';
 import FormLogin from '../Entidades/Login';
 const { Step } = Steps;
 
