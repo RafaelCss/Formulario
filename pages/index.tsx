@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import HomeCadastro from '../src/Componentes/Entidades/Cadastro/indext'
+import HomeCadastro from '../src/Componentes/Home'
+
 
 const Home: NextPage = () => {
   return (

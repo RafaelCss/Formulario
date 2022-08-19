@@ -1,25 +1,37 @@
 import { LoadingOutlined, SmileOutlined, SolutionOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, message, Steps } from 'antd';
 import { useState } from 'react';
+import { Conteudo, Isteps } from '../../Util/Interfaces/Isteps';
+import S from '../../Util/Styles/style';
+import FormCadastro from '../Entidades/Cadastro/indext';
+import FormLogin from '../Entidades/Login';
 const { Step } = Steps;
 
-const steps = [
-  {
-    titulo: 'Login',
-    conteudo: 'First-content',
-  },
-  {
-    titulo: 'Cadastro',
-    conteudo: <div>Teste 01</div>,
+function HomeCadastro() {
+  const steps = [
+    {
+      titulo: 'Login',
+      conteudo: <FormLogin />,
+      id: 1,
+      icone: <UserOutlined />
+    },
+    {
+      titulo: 'Cadastro',
+      conteudo:<FormCadastro/>,
+      id: 2,
+      icone: <UserOutlined />
 
-  },
-  {
-    titulo: 'Tabela',
-    conteudo: 'Last-content',
-  },
-];
+    },
+    {
+      titulo: 'Tabela',
+      conteudo: 'First-content',
+      id:3 ,
+      icone: <UserOutlined />
+    },
+  ];
 
-function StepsAntd() {
+
+
   const [current, setCurrent] = useState(0);
 
   const next = () => {
@@ -30,11 +42,12 @@ function StepsAntd() {
     setCurrent(current - 1);
   };
 
+
   return (
-    <>
+    <S.Container>
       <Steps current={current}>
-        {steps.map(item => (
-          <Step key={item.titulo} title={item.titulo} />
+        {steps && steps.map(item => (
+          <Step key={item.titulo} title={item.titulo} icon={item.icone ? item.icone : <LoadingOutlined />} />
         ))}
       </Steps>
 
@@ -56,9 +69,9 @@ function StepsAntd() {
           </Button>
         )}
       </div>
-    </>
-  );
+    </S.Container>
+  )
 }
 
 
-export default StepsAntd;
+export default HomeCadastro;
