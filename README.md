@@ -39,6 +39,8 @@ Formulário de cadastro de usuários e de produtos diversos.
 4. execute npm run build.
 5. Finalmente execute firebase deploy — only hosting no terminal.
 
+6. futuros deploys somente firebase deploy..
+
 
 OBS: Este é um jeito de fazer deploy do projeto no firebase hosting da forma mais simples.
 
