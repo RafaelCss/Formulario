@@ -10,3 +10,14 @@ export interface Conteudo {
   id: string | number;
   icone: ReactElement;
 }
+
+
+export interface IUser{
+  dados : CadastroUser
+}
+
+export interface CadastroUser{
+  email: string
+  senha : string
+  data ?: Date
+}

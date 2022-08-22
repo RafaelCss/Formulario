@@ -1,46 +1,48 @@
 import { Button, Checkbox, Form, Input } from 'antd';
 import S from '../../../Util/Styles/style';
+import app from '../../../libs/servicos/login'
+import { useEffect, useState } from 'react';
 
 
 
 function FormLogin() {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-  };
+  const [form] = Form.useForm()
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+
+ async function enviarDados() {
+  await  app.logar(form.getFieldsValue()).then(res => {console.log(res)})
+  await app.buscar().then(res => {console.log(res)})
+  }
+
 
   return (
     <S.ContainerFormulario>
       <Form
-        name="basic"
+        form={form}
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
       >
         <Form.Item
-          label="Username"
-          name="username"
+          label="Email"
+          name={["email"]}
           rules={[{ required: true, message: 'Please input your username!' }]}
         >
-          <Input />
+          <Input name='email' />
         </Form.Item>
 
         <Form.Item
-          label="Password"
-          name="password"
+          label="senha"
+          name={["senha"]}
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
-          <Input.Password />
+          <Input.Password name='senha' />
         </Form.Item>
+        <Button onClick={() => enviarDados()}>Logar</Button>
       </Form>
     </S.ContainerFormulario>
   );
 };
 
 export default FormLogin;
+
