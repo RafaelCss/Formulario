@@ -16,7 +16,7 @@ function HomeCadastro() {
     },
     {
       titulo: 'Cadastro',
-      conteudo:<FormCadastro/>,
+      conteudo: <FormCadastro />,
       id: 2,
       icone: <UserOutlined />
 
@@ -24,7 +24,7 @@ function HomeCadastro() {
     {
       titulo: 'Tabela',
       conteudo: 'First-content',
-      id:3 ,
+      id: 3,
       icone: <UserOutlined />
     },
   ];
@@ -53,19 +53,37 @@ function HomeCadastro() {
       <div className="steps-content">{steps[current].conteudo}</div>
       <div className="steps-action">
         {current < steps.length - 1 && (
+          <>
+            <Button type="primary" onClick={() => next()}>
+              Logar
+            </Button>
+            <Button type="primary" onClick={() => next()}>
+              Cancelar
+            </Button>
+          </>
+        )? current === 0 ? (
           <Button type="primary" onClick={() => next()}>
-            Continuar
+            Logar
           </Button>
-        )}
-        {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
-            Tudo Certo !
+        ) : (
+
+          <Button type="primary" onClick={() => next()}>
+            Cadastrar
+          </Button>
+        ) : (
+          <Button type="primary" onClick={() => next()}>
+            Cadastrar
           </Button>
         )}
         {current > 0 && (
-          <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-            Voltar
-          </Button>
+          <>
+            <Button type="primary" onClick={() => message.success('Processing complete!')}>
+              Continuar
+            </Button>
+            <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+              Voltar
+            </Button>
+          </>
         )}
       </div>
     </S.Container>

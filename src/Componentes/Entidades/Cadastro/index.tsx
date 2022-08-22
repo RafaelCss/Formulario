@@ -26,19 +26,19 @@ function FormCadastro() {
   return (
     <S.Container>
       <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-        <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
+        <Form.Item name={['nome']} label="Nome Produto :" required rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item name={['user', 'email']} label="Email" rules={[{ type: 'email' }]}>
+        <Form.Item name={['nomeFornecedor']} label="Fornecedor :"  required rules={[{ type: 'email' }]}>
           <Input />
         </Form.Item>
-        <Form.Item name={['user', 'age']} label="Age" rules={[{ type: 'number', min: 0, max: 99 }]}>
+        <Form.Item name={['valor']} label="Valor :" required rules={[{ type: 'number', min: 0, max: 99 }]}>
           <InputNumber />
         </Form.Item>
-        <Form.Item name={['user', 'website']} label="Website">
+        <Form.Item name={['tipo']} required label="Tipo Produto :">
           <Input />
         </Form.Item>
-        <Form.Item name={['user', 'introduction']} label="Introduction">
+        <Form.Item name={['descricao']} label="Descrição :">
           <Input.TextArea />
         </Form.Item>
       </Form>
