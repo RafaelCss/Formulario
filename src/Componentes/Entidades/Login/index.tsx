@@ -1,46 +1,50 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import S from '../../../Util/Styles/style';
-import app from '../../../libs/servicos/login'
-import { useEffect, useState } from 'react';
-
-
+import app from '../../../libs/servicos/auth/login'
 
 function FormLogin() {
   const [form] = Form.useForm()
 
-
- async function enviarDados() {
-  await  app.logar(form.getFieldsValue()).then(res => {console.log(res)})
-  await app.buscar().then(res => {console.log(res)})
+ function enviarDados() {
+    form.validateFields().then( async() =>{
+      await app.logar(form.getFieldsValue())
+    }).catch(err =>{
+      alert(err)
+    })
   }
 
-
   return (
-    <S.ContainerFormulario>
-      <Form
-        form={form}
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        initialValues={{ remember: true }}
-      >
-        <Form.Item
-          label="Email"
-          name={["email"]}
-          rules={[{ required: true, message: 'Please input your username!' }]}
+    <S.Container>
+      <S.ContainerTitulo>
+        <h1>Faça login : </h1>
+      </S.ContainerTitulo>
+      <S.ContainerFormulario>
+        <Form
+          form={form}
         >
-          <Input name='email' />
-        </Form.Item>
+          <Form.Item
+            label="Email"
+            name={["email"]}
+            required
+            rules={[{ message: 'Insira seu Email!' }]}
+          >
+            <Input name='email' />
+          </Form.Item>
 
-        <Form.Item
-          label="senha"
-          name={["senha"]}
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password name='senha' />
-        </Form.Item>
-        <Button onClick={() => enviarDados()}>Logar</Button>
-      </Form>
-    </S.ContainerFormulario>
+          <Form.Item
+            label="Senha"
+            name={["senha"]}
+            required
+            rules={[{ message: 'Insira sua Senha!' }]}
+          >
+            <Input.Password name='senha' />
+          </Form.Item>
+          <S.ContainerBotao>
+            <Button onClick={() => enviarDados()}>Logar</Button>
+          </S.ContainerBotao>
+        </Form>
+      </S.ContainerFormulario>
+    </S.Container>
   );
 };
 

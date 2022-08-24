@@ -8,5 +8,7 @@
     "icone",
     "Isteps",
     "logar"
-  ]
+  ],
+  "material-icon-theme.activeIconPack": "react",
+  "material-icon-theme.showWelcomeMessage": false
 }

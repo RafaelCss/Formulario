@@ -21,3 +21,7 @@ export interface CadastroUser{
   senha : string
   data ?: Date
 }
+
+export interface Autenticado {
+  autenticado : boolean
+}

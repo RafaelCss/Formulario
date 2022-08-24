@@ -8,7 +8,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 600px;
   background-color: #f5f5f5;
   padding: 20px;
 `;
@@ -19,10 +19,36 @@ const ContainerFormulario = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 30%;
   background-color: #f5f5f5;
   padding: 20px;
 `;
 
+const ContainerBotao = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 30%;
+  background-color: #f5f5f5;
+  padding: 20px;
+`;
 
-export default { Container, ContainerFormulario };
+const ContainerTitulo = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin: 20px 0px 30px 0px;
+  height: 50px;
+  h1{
+    color: black;
+  }
+`;
+
+
+
+export default { Container, ContainerFormulario, ContainerBotao, ContainerTitulo };
