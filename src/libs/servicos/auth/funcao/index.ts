@@ -1,15 +1,18 @@
+import { IsAuthenticate } from "../../../Interfaces"
 
-export function salvarToken(){
- const session =  () =>  localStorage.setItem( 'teste', 'teste' )
-}
-salvarToken()
-export function buscarToken(){
-  const session =  () => localStorage?.getItem( 'id_user')
-  return JSON.stringify(session)
+
+export async function salvarToken(dados: any) {
+  const convertJson = JSON.stringify(dados)
+  localStorage.setItem('user', convertJson)
 }
 
-export function deleteToken(){
-  const session =  () => localStorage.removeItem( 'id_user')
+export async function buscarToken() {
+   var user = localStorage.getItem('user')
+   return   user as IsAuthenticate
+}
+
+export function deleteToken() {
+  const session = () => localStorage.removeItem('user')
 }
 
 

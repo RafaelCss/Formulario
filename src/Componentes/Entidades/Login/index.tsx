@@ -7,7 +7,7 @@ function FormLogin() {
 
  function enviarDados() {
     form.validateFields().then( async() =>{
-      await app.logar(form.getFieldsValue())
+       const dados = await app.logar(form.getFieldsValue())
     }).catch(err =>{
       alert(err)
     })

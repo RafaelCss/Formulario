@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 export interface Isteps {
-  steps : Conteudo;
+  steps: Conteudo;
 }
 
 export interface Conteudo {
@@ -12,16 +12,23 @@ export interface Conteudo {
 }
 
 
-export interface IUser{
-  dados : CadastroUser
+export interface IUser {
+  dados: CadastroUser
 }
 
-export interface CadastroUser{
+export interface CadastroUser {
   email: string
-  senha : string
-  data ?: Date
+  senha: string
+  data?: Date
 }
 
 export interface Autenticado {
-  autenticado : boolean
+  autenticado: boolean
+}
+
+
+export interface IsAuthenticate {
+  auth ?: boolean
+  token ?: string
+  usuario ?: string
 }

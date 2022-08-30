@@ -7,7 +7,8 @@
     "Gerenciador",
     "icone",
     "Isteps",
-    "logar"
+    "logar",
+    "usuario"
   ],
   "material-icon-theme.activeIconPack": "react",
   "material-icon-theme.showWelcomeMessage": false

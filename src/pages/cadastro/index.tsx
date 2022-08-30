@@ -3,18 +3,21 @@ import Head from 'next/head'
 import HomeCadastro from '../../Componentes/Entidades/Cadastro'
 import { buscarToken, salvarToken } from '../../libs/servicos/auth/funcao'
 import Router from 'next/router';
-import { Autenticado } from '../../libs/Interfaces';
-import { useEffect } from 'react';
+import { Autenticado, IsAuthenticate } from '../../libs/Interfaces';
+import { useEffect, useState } from 'react';
 const rota = Router
 
 
-function Cadastro({ autenticado }: Autenticado) {
+function Cadastro() {
+  const [autenticado, setAutenticado] = useState<boolean>()
+  const authSession = buscarToken().then(res => setAutenticado(res.auth))
 
-  useEffect(() =>{
-    if(!autenticado){
+  console.log(authSession)
+  useEffect(() => {
+    if (!autenticado) {
       rota.push('/')
     }
-  },[autenticado])
+  }, [autenticado])
 
   return (
     <>
@@ -23,16 +26,15 @@ function Cadastro({ autenticado }: Autenticado) {
         <meta name="description" content="Gerenciador de produtos e fornecedores" />
       </Head>
       {
-        autenticado && autenticado ?
-          (<HomeCadastro />) : (<></>)
+        (<HomeCadastro />)
       }
     </>
   )
 }
 
-export function getServerSideProps(ctx: any) {
-  const authSession = buscarToken();
-  if (!authSession) {
+ export async function getServerSideProps(ctx: any) {
+  const authSession : IsAuthenticate = await buscarToken();
+  if (!authSession.auth) {
     return {
       props: {
         autenticado: false,
@@ -42,7 +44,7 @@ export function getServerSideProps(ctx: any) {
 
   return {
     props: {
-      autenticado: true,
+      autenticado: authSession.auth,
     },
   };
 }
