@@ -1,26 +1,28 @@
 
-import { CadastroUser} from '../../../Interfaces'
+import { CadastroUser, IsAuthenticate } from '../../../Interfaces'
 import api from '../../config'
 import Router from 'next/router';
 import { salvarToken } from '../funcao';
 const rota = Router
 
 
-async function logar(dados : CadastroUser) {
+async function logar(dados: CadastroUser) {
   await api.post('/login', dados)
-  .then(res => {
-     salvarToken(res.data)
-    rota.push('/cadastro')
-    return res.data
-  })
-  .catch(err => { return err })
+    .then(async (res) => {
+      const user = await  res.data
+      if(user.dados.auth == true){
+        await salvarToken(dados)
+      }
+
+    })
+    .catch(err => { return err })
 }
 
 async function buscar() {
   api.get('/')
-  .then(res => {res.data})
+    .then(res => { res.data })
 }
 
 
 
-export default {logar, buscar}
+export default { logar, buscar }

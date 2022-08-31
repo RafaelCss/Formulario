@@ -1,14 +1,18 @@
 import { IsAuthenticate } from "../../../Interfaces"
+ import {setCookie, parseCookies} from 'nookies'
 
 
 export async function salvarToken(dados: any) {
-  const convertJson = JSON.stringify(dados)
-  localStorage.setItem('user', convertJson)
+  console.log(dados)
+  const convertJson = JSON.stringify(dados as IsAuthenticate)
+  setCookie(undefined, 'user', convertJson, {
+    maxAge : 60 * 60 * 1 // uma hora
+  })
 }
 
-export async function buscarToken() {
-   var user = localStorage.getItem('user')
-   return   user as IsAuthenticate
+ export  function buscarToken() {
+   const {'user': user}  = parseCookies()
+    return   user ;
 }
 
 export function deleteToken() {

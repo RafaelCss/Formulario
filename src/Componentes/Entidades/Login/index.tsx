@@ -1,18 +1,19 @@
 import { Button, Form, Input } from 'antd';
 import S from '../../../Util/Styles/style';
 import app from '../../../libs/servicos/auth/login'
+import { AuthContext } from '../../../libs/servicos/cadastroProduto';
+import { useContext } from 'react';
 
 function FormLogin() {
   const [form] = Form.useForm()
-
+  const {token, autenticado} = useContext(AuthContext)
  function enviarDados() {
-    form.validateFields().then( async() =>{
+    form.validateFields().then( async(res) =>{
        const dados = await app.logar(form.getFieldsValue())
     }).catch(err =>{
       alert(err)
     })
   }
-
   return (
     <S.Container>
       <S.ContainerTitulo>
