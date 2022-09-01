@@ -2,16 +2,18 @@
 import { CadastroUser, IsAuthenticate } from '../../../Interfaces'
 import api from '../../config'
 import Router from 'next/router';
-import { salvarToken } from '../funcao';
+import { salvarToken,buscarToken } from '../funcao';
 const rota = Router
 
 
 async function logar(dados: CadastroUser) {
   await api.post('/login', dados)
     .then(async (res) => {
-      const user = await  res.data
-      if(user.dados.auth == true){
-        await salvarToken(dados)
+      const user = await res.data
+      if(user.auth == true){
+        await salvarToken(user.auth)
+        salvarToken(user.token)
+        rota.push('/cadastro')
       }
 
     })

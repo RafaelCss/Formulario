@@ -2,10 +2,8 @@ import { IsAuthenticate } from "../../../Interfaces"
  import {setCookie, parseCookies} from 'nookies'
 
 
-export async function salvarToken(dados: any) {
-  console.log(dados)
-  const convertJson = JSON.stringify(dados as IsAuthenticate)
-  setCookie(undefined, 'user', convertJson, {
+export async function salvarToken(dados: IsAuthenticate) {
+  setCookie(undefined, 'user',JSON.stringify( dados), {
     maxAge : 60 * 60 * 1 // uma hora
   })
 }

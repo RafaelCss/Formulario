@@ -1,14 +1,18 @@
 import Head from 'next/head'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import HomeCadastro from '../../Componentes/Entidades/Cadastro'
 import { AuthContext } from '../../libs/servicos/cadastroProduto'
-import Router from 'next/router'
-import { parseCookies } from 'nookies'
-const rota = Router
+import Router from 'next/router';
+const rota = Router;
 
-
-function Cadastro({token} : any) {
-  console.log(token)
+function Cadastro() {
+  const context = useContext(AuthContext)
+  const [auth, setAuth] = useState(context)
+  useEffect(() => {
+    if (!auth.token) {
+      rota.push('/')
+    }
+  })
   return (
     <>
       <Head>
@@ -16,17 +20,16 @@ function Cadastro({token} : any) {
         <meta name="description" content="Gerenciador de produtos e fornecedores" />
       </Head>
       {
-        <HomeCadastro />
+        auth &&
+          auth ?
+          <HomeCadastro />
+          : <>Você não está logado</>
       }
     </>
   )
 }
 
-export async function getServerSideProps(ctx : any){
- const token = parseCookies()
 
- return { props: { token } }
-}
 
 export default Cadastro
 

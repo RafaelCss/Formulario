@@ -13,7 +13,8 @@ export interface Conteudo {
 
 
 export interface IUser {
-  dados: CadastroUser
+  email: string
+  senha: string
 }
 
 export interface CadastroUser {
