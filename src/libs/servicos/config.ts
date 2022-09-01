@@ -1,15 +1,15 @@
 import axios from 'axios';
-import { parseCookies } from 'nookies';
-const {'user' : user } = parseCookies()
+import { IsAuthenticate } from '../Interfaces';
+import { buscarToken } from './auth/funcao';
+const user : IsAuthenticate =  buscarToken() ;
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL_LOCAL,
-});
+})
 
-/* if(user.dados.token){
-
+if (user && user?.auth === true) {
+  api.defaults.headers.common['Authorization'] = user?.token as string;
 }
- */
 export default api;
 
 

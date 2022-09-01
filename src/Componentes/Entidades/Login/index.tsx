@@ -1,7 +1,7 @@
 import { Button, Empty, Form, Input } from 'antd';
-import S from '../../../Util/Styles/style';
+import S from '../../../libs/Util/Styles/style';
 import app from '../../../libs/servicos/auth/login'
-import { AuthContext } from '../../../libs/servicos/cadastroProduto';
+import { AuthContext } from '../../../libs/servicos/ContextoLogin';
 import { useContext } from 'react';
 import { IUser } from '../../../libs/Interfaces';
 

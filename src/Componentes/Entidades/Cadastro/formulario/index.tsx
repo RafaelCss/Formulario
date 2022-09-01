@@ -1,7 +1,7 @@
 import { Form, Input, InputNumber } from 'antd';
-import S from '../../../../Util/Styles/style';
+import S from '../../../../libs/Util/Styles/style';
 
-function FormCadastro() {
+function FormCadastroA() {
 
   const [form ]= Form.useForm()
 
@@ -11,14 +11,11 @@ function FormCadastro() {
         <Form.Item name={['nome']} label="Nome Produto :" required rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item name={['nomeFornecedor']} label="Fornecedor :" required rules={[{ type: 'email' }]}>
+        <Form.Item name={['tipo']} required label="Tipo Produto :">
           <Input />
         </Form.Item>
         <Form.Item name={['valor']} label="Valor :" required rules={[{ type: 'number', min: 0, max: 99 }]}>
           <InputNumber />
-        </Form.Item>
-        <Form.Item name={['tipo']} required label="Tipo Produto :">
-          <Input />
         </Form.Item>
         <Form.Item name={['descricao']} label="Descrição :">
           <Input.TextArea />
@@ -29,4 +26,4 @@ function FormCadastro() {
 }
 
 
-export default FormCadastro;
+export default FormCadastroA;

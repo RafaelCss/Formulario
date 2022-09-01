@@ -1,6 +1,6 @@
 import 'antd/dist/antd.css';
 import type { AppProps } from 'next/app'
-import { AuthProvider } from '../libs/servicos/cadastroProduto';
+import { AuthProvider } from '../libs/servicos/ContextoLogin';
 
 function MyApp({ Component, pageProps }: AppProps) {
 

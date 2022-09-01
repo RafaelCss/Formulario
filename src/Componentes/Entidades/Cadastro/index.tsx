@@ -1,24 +1,34 @@
 import { LoadingOutlined, SmileOutlined, SolutionOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, message, Steps } from 'antd';
 import { useState } from 'react';
-import S from "../../../Util/Styles/style";
-import FormCadastro from './formulario/index';
+import S from "../../../libs/Util/Styles/style";
+import FormCadastroA from './formulario/index';
+import FormCadastroB from './formulario/index2';
 const { Step } = Steps;
 
 function HomeCadastro() {
+  const [dados , setDados] = useState()
+
   const steps = [
     {
-      titulo: 'Cadastro',
-      conteudo: <FormCadastro />,
-      id: 2,
+      titulo: 'Produto',
+      conteudo: <FormCadastroA />,
+      id: 1,
       icone: <UserOutlined />
 
     },
     {
-      titulo: 'Tabela',
-      conteudo: 'First-content',
-      id: 3,
+      titulo: 'Fornecedor',
+      conteudo: <FormCadastroB />,
+      id: 2,
       icone: <UserOutlined />
+    },
+
+    {
+      titulo: 'Finalização',
+      conteudo: <FormCadastroB />,
+      id: 3,
+      icone: <LoadingOutlined/>
     },
   ];
 
@@ -39,7 +49,7 @@ function HomeCadastro() {
     <S.Container>
       <Steps current={current}>
         {steps && steps.map(item => (
-          <Step key={item.titulo} title={item.titulo} icon={item.icone ? item.icone : <LoadingOutlined />} />
+          <Step key={item.titulo} title={item.titulo} icon={item.icone ?? item.icone} />
         ))}
       </Steps>
 
@@ -48,41 +58,23 @@ function HomeCadastro() {
         {current < steps.length - 1 && (
           <>
             <Button type="primary" onClick={() => next()}>
-              Logar
-            </Button>
-            <Button type="primary" onClick={() => next()}>
-              Cancelar
-            </Button>
-          </>
-        ) ? current === 0 ? (
-          <>
-            <Button type="primary" onClick={() => next()}>
               Continuar
             </Button>
-            <Button type="primary"  onClick={() => next()}>
+            <Button type="primary" onClick={() => console.log('oi')}>
               Cancelar
             </Button>
           </>
-        ) : (
+        )} {current >= 0 && (
+          <Button type="primary" onClick={() => prev()}>
+            Voltar
+          </Button>
+        )}
+        {current === steps.length - 1 && (
+          <Button type="primary" onClick={() => alert('Cadastro enviado')}>
+            Cadastrar
+          </Button>
+        )}
 
-          <Button type="primary" onClick={() => next()}>
-            Cadastrar
-          </Button>
-        ) : (
-          <Button type="primary" onClick={() => next()}>
-            Cadastrar
-          </Button>
-        )}
-        {current > 0 && (
-          <>
-            <Button type="primary" onClick={() => message.success('Processing complete!')}>
-              Continuar
-            </Button>
-            <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-              Voltar
-            </Button>
-          </>
-        )}
       </div>
     </S.Container>
   )

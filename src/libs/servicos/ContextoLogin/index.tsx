@@ -1,5 +1,6 @@
 
 import React, { createContext, ReactElement, ReactNode, SetStateAction, useEffect, useState } from "react";
+import { IsAuthenticate } from "../../Interfaces";
 import { buscarToken } from "../auth/funcao";
 
 
@@ -8,22 +9,23 @@ interface Props {
 }
 
 interface Auth {
-  autenticado: boolean
-  token?: string
-  userToken?: SetStateAction<undefined>
+  autenticado?: boolean
+  userAuth?: SetStateAction<IsAuthenticate>
 }
 
 export const AuthContext: React.Context<Auth> = createContext<Auth>({} as Auth)
 
 export function AuthProvider({ children }: Props): ReactElement {
-  const [auth, setAuthToken] = useState<string>()
-  const token = buscarToken()
-  const autenticado = auth ? true : false
+  const [userAuth, setUserAuth] = useState<IsAuthenticate>()
+
+  const user : IsAuthenticate = buscarToken()
+  const autenticado =   user?.auth
   useEffect(() => {
-    setAuthToken(token)
+    setUserAuth(user)
   }, [])
+
   return (
-    <AuthContext.Provider value={{ autenticado, token }}>
+    <AuthContext.Provider value={{ autenticado, userAuth }}>
       {children}
     </AuthContext.Provider>
   )

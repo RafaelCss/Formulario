@@ -3,13 +3,16 @@ import { IsAuthenticate } from "../../../Interfaces"
 
 
 export async function salvarToken(dados: IsAuthenticate) {
-  setCookie(undefined, 'user',JSON.stringify( dados), {
+  setCookie(undefined, 'user', JSON.stringify(dados) , {
     maxAge : 60 * 60 * 1 // uma hora
   })
 }
 
  export  function buscarToken() {
-   const {'user': user}  = parseCookies()
+   const {'user': user }  = parseCookies()
+   if(user){
+    return JSON.parse(user)
+   }
     return   user ;
 }
 

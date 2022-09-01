@@ -1,35 +1,38 @@
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import React, { useContext, useEffect, useState } from 'react'
+import {parseCookies} from 'nookies'
 import HomeCadastro from '../../Componentes/Entidades/Cadastro'
-import { AuthContext } from '../../libs/servicos/cadastroProduto'
-import Router from 'next/router';
-const rota = Router;
+
 
 function Cadastro() {
-  const context = useContext(AuthContext)
-  const [auth, setAuth] = useState(context)
-  useEffect(() => {
-    if (!auth.token) {
-      rota.push('/')
-    }
-  })
   return (
     <>
       <Head>
         <title>Cadastro de Produtos</title>
         <meta name="description" content="Gerenciador de produtos e fornecedores" />
-      </Head>
-      {
-        auth &&
-          auth ?
-          <HomeCadastro />
-          : <>Você não está logado</>
-      }
+      </Head>''
+        <HomeCadastro />
     </>
   )
 }
 
+export const getServerSideProps  : GetServerSideProps= async (ctx) => {
 
+  const {['user'] : token }= parseCookies(ctx)
+  console.log(token)
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
+}
 
 export default Cadastro
 
