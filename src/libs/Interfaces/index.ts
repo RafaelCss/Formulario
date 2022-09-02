@@ -33,3 +33,18 @@ export interface IsAuthenticate {
   token ?: string
   usuario ?: string
 }
+
+
+export interface Produto {
+  nomeProduto : string
+  tipo : string
+  valor : string
+  descricao : string
+  nomeFornecedor : string
+  email : string
+  telefone : string
+}
+export interface Formulario {
+  dados : Produto
+  enviarDados ?: (dados : string) => void
+}

@@ -1,10 +1,18 @@
 import { Form, Input, InputNumber } from 'antd';
+import { Formulario, Produto } from '../../../../libs/Interfaces';
 import S from '../../../../libs/Util/Styles/style';
 
 function FormCadastroB() {
 
-  const [form] = Form.useForm()
-
+  const [form ]= Form.useForm()
+  function enviarDados( {dados} : Formulario) {
+    form.validateFields().then( async(res) =>{
+       const dados : Produto = form.getFieldsValue(true)
+    }).catch(err =>{
+      alert(err)
+    })
+  }
+  console.log(form.getFieldsValue())
   return (
     <S.Container>
       <Form form={form}>

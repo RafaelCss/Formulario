@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import {parseCookies} from 'nookies'
+import { parseCookies } from 'nookies'
 import HomeCadastro from '../../Componentes/Entidades/Cadastro'
+import { IsAuthenticate } from '../../libs/Interfaces'
 
 
 function Cadastro() {
@@ -10,17 +11,17 @@ function Cadastro() {
       <Head>
         <title>Cadastro de Produtos</title>
         <meta name="description" content="Gerenciador de produtos e fornecedores" />
-      </Head>''
-        <HomeCadastro />
+      </Head>
+      <HomeCadastro />
     </>
   )
 }
 
-export const getServerSideProps  : GetServerSideProps= async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { ['user']: token } = parseCookies(ctx)
+  const user: IsAuthenticate =await JSON.parse(token) ? JSON.parse(token) :  false
 
-  const {['user'] : token }= parseCookies(ctx)
-  console.log(token)
-  if (!token) {
+  if (!user.auth) {
     return {
       redirect: {
         destination: '/',
