@@ -1,4 +1,4 @@
-import { Button, Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input, InputNumber, Select } from 'antd';
 import { useCallback, useContext } from 'react';
 import { Produto } from '../../../../libs/Interfaces';
 import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
@@ -7,10 +7,11 @@ import S from '../../../../libs/Util/Styles/style';
 function FormCadastroA() {
   const { cadastroValores, guardarValores } = useContext(CadastroContext)
   const [form] = Form.useForm()
-  const inicialValues = useCallback(() => {
-      form.setFieldsValue(cadastroValores)
-  }, [cadastroValores])
 
+  /*   const inicialValues = useCallback(() => {
+        form.setFieldsValue(cadastroValores)
+    }, [cadastroValores])
+   */
   function enviarDados() {
     form.validateFields().then(async (res) => {
       const dados: Produto = form.getFieldsValue(true)
@@ -20,7 +21,7 @@ function FormCadastroA() {
     })
   }
 
-  function limparFormulario(){
+  function limparFormulario() {
     form.resetFields()
   }
 
@@ -39,13 +40,13 @@ function FormCadastroA() {
             <Input />
           </Form.Item>
           <Form.Item name={['tipo']} required label="Tipo Produto :">
+            <Select />
+          </Form.Item>
+          <Form.Item name={['valor']} label="Valor :" required rules={[{ required : true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['valor']} label="Valor :" required rules={[{ type: 'number', min: 0, max: 99 }]}>
-            <InputNumber />
-          </Form.Item>
           <Form.Item name={['descricao']} label="Descrição :">
-            <Input.TextArea />
+            <Input.TextArea showCount  maxLength={200}/>
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           </Form.Item>

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { IsAuthenticate } from '../Interfaces';
-import { buscarToken } from './auth/funcao';
+import { IsAuthenticate } from '../../Interfaces';
+import { buscarToken } from '../auth/funcao';
 const user : IsAuthenticate =  buscarToken() ;
 
 const api = axios.create({

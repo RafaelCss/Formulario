@@ -34,16 +34,26 @@ export interface IsAuthenticate {
   usuario ?: string
 }
 
+export interface ListaProdutos{
+  dados : Produto
+}
 
 export interface Produto {
   nomeProduto : string
-  tipo : string
+  tipo : TipoProduto
   valor : number
   descricao : string
   nomeFornecedor : string
   email : string
   telefone : string
 }
+
+export  enum TipoProduto {
+  perecivel = 1 ,
+  limpeza = 2 ,
+  higiene = 3
+}
+
 export interface Formulario {
   dados : Produto
   enviarDados ?: (dados : string) => void

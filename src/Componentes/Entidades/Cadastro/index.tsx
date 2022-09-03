@@ -1,6 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Button,Space, Steps } from 'antd';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { ListaProdutos } from '../../../libs/Interfaces';
 import { CadastroContext } from '../../../libs/servicos/ContextoCadastro';
 import S from "../../../libs/Util/Styles/style";
 import FormCadastroA from './formulario/index';
@@ -9,6 +10,9 @@ const { Step } = Steps;
 
 function HomeCadastro() {
   const [current, setCurrent] = useState(0);
+  const [produtos , setProdutos] = useState<ListaProdutos>()
+  const {buscar} = useContext(CadastroContext)
+
 
   const next = () => {
     setCurrent(current + 1);
@@ -37,6 +41,7 @@ function HomeCadastro() {
 
   return (
     <S.Container>
+      <>
       <div style={{ display: 'flex', width: '100%', marginTop: '50px', padding: '10px', justifyContent: 'space-evenly', alignItems: 'center' }}>
         <Steps current={current}>
           {steps && steps.map(item => (
@@ -66,13 +71,15 @@ function HomeCadastro() {
               <Button type="primary" onClick={() => alert('Cadastro enviado')}>
                 Cadastrar
               </Button>
-              <Button type="primary" onClick={() => console.log('oi')}>
+              <Button danger onClick={() => console.log('oi')}>
                 Cancelar
               </Button>
             </>
           )}
         </Space>
       </div>
+
+      </>
     </S.Container >
   )
 }

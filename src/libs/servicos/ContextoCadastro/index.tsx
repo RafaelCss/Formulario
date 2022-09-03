@@ -1,5 +1,6 @@
-import { createContext, ReactNode, SetStateAction, useEffect, useState } from "react";
-import { Produto } from "../../Interfaces";
+import { createContext, ReactNode,useState } from "react";
+import { ListaProdutos, Produto } from "../../Interfaces";
+import { buscarProdutos } from "../rotas/Produtos/cadastro";
 interface Props {
   children: ReactNode
 }
@@ -7,11 +8,11 @@ interface Props {
 interface ProdutoContext {
   cadastroValores?: Produto
   guardarValores: (dados: Produto) => void
+  buscar : () => Promise<ListaProdutos>
 }
 export const CadastroContext: React.Context<ProdutoContext> = createContext<ProdutoContext>({} as ProdutoContext)
 
 export function CadastroProvider({ children }: Props) {
-
   const [cadastroValores, setCadastroValores] = useState<Produto>()
 
   function guardarValores(dados: Produto) {
@@ -22,9 +23,14 @@ export function CadastroProvider({ children }: Props) {
       }
     })
   }
-
+ async function buscar(){
+   const produtos : ListaProdutos = await buscarProdutos()
+   .then(res => {return res})
+   .catch(err => {return err})
+   return produtos;
+  }
   return (
-    <CadastroContext.Provider value={{ cadastroValores, guardarValores }}>
+    <CadastroContext.Provider value={{ cadastroValores, guardarValores, buscar }}>
       {children}
     </CadastroContext.Provider>
   )

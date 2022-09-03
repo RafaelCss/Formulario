@@ -1,6 +1,6 @@
 
 import { CadastroUser, IsAuthenticate } from '../../../Interfaces'
-import api from '../../config'
+import api from '../../rotas/config'
 import Router from 'next/router';
 import { salvarToken } from '../funcao';
 const rota = Router
@@ -18,11 +18,4 @@ async function logar(dados: CadastroUser) {
     .catch(err => { return err })
   }
 
-async function buscar() {
- await api.get('/')
-    .then(res => { res.data })
-}
-
-
-
-export default { logar, buscar }
+export default { logar }
