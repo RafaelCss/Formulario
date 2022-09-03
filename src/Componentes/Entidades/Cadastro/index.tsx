@@ -1,7 +1,6 @@
-import { LoadingOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Space, Steps } from 'antd';
-import Item from 'antd/lib/list/Item';
-import { ReactElement, ReactNode, useContext, useState } from 'react';
+import { UserOutlined } from '@ant-design/icons';
+import { Button,Space, Steps } from 'antd';
+import { useState } from 'react';
 import { CadastroContext } from '../../../libs/servicos/ContextoCadastro';
 import S from "../../../libs/Util/Styles/style";
 import FormCadastroA from './formulario/index';
@@ -33,13 +32,6 @@ function HomeCadastro() {
       id: 2,
       icone: <UserOutlined />
     },
-
-    {
-      titulo: 'Finalização',
-      conteudo:'Teste',
-      id: 3,
-      icone: <LoadingOutlined />
-    },
   ];
 
 
@@ -70,13 +62,18 @@ function HomeCadastro() {
             </Button>
           )}
           {current === steps.length - 1 && (
-            <Button type="primary" onClick={() => alert('Cadastro enviado')}>
-              Cadastrar
-            </Button>
+            <>
+              <Button type="primary" onClick={() => alert('Cadastro enviado')}>
+                Cadastrar
+              </Button>
+              <Button type="primary" onClick={() => console.log('oi')}>
+                Cancelar
+              </Button>
+            </>
           )}
         </Space>
       </div>
-    </S.Container>
+    </S.Container >
   )
 }
 

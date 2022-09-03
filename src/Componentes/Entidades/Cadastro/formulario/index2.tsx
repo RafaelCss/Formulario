@@ -9,7 +9,7 @@ function FormCadastroB() {
   const { cadastroValores, guardarValores } = useContext(CadastroContext)
 
   const inicialValues = useCallback(() => {
-      form.setFieldsValue(cadastroValores)
+    form.setFieldsValue(cadastroValores)
   }, [cadastroValores])
   function enviarDados() {
     form.validateFields().then(async (res) => {
@@ -38,9 +38,6 @@ function FormCadastroB() {
         <Form.Item name={['telefone']} label="Telefone :">
           <Input />
         </Form.Item>
-        <Button type="primary" onClick={enviarDados}>
-          Sub
-        </Button>
       </Form>
     </S.Container>
   )

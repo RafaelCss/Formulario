@@ -19,7 +19,11 @@ function FormCadastroA() {
       alert(err)
     })
   }
-  console.log(cadastroValores)
+
+  function limparFormulario(){
+    form.resetFields()
+  }
+
   return (
     <S.Container>
       <S.ContainerFormulario>
@@ -44,9 +48,6 @@ function FormCadastroA() {
             <Input.TextArea />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" onClick={enviarDados}>
-              Sub
-            </Button>
           </Form.Item>
         </Form>
       </S.ContainerFormulario>
