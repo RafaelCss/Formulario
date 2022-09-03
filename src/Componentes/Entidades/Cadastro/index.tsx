@@ -1,14 +1,23 @@
 import { LoadingOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Space, Steps } from 'antd';
-import { useState } from 'react';
+import Item from 'antd/lib/list/Item';
+import { ReactElement, ReactNode, useContext, useState } from 'react';
+import { CadastroContext } from '../../../libs/servicos/ContextoCadastro';
 import S from "../../../libs/Util/Styles/style";
 import FormCadastroA from './formulario/index';
 import FormCadastroB from './formulario/index2';
 const { Step } = Steps;
 
 function HomeCadastro() {
-  const [dados, setDados] = useState()
   const [current, setCurrent] = useState(0);
+
+  const next = () => {
+    setCurrent(current + 1);
+  };
+
+  const prev = () => {
+    setCurrent(current - 1);
+  };
 
   const steps = [
     {
@@ -27,25 +36,16 @@ function HomeCadastro() {
 
     {
       titulo: 'Finalização',
-      conteudo: <FormCadastroB />,
+      conteudo:'Teste',
       id: 3,
       icone: <LoadingOutlined />
     },
   ];
 
 
-  const next = () => {
-    setCurrent(current + 1);
-  };
-
-  const prev = () => {
-    setCurrent(current - 1);
-  };
-
-
   return (
     <S.Container>
-      <div style={{ display: 'flex', width:'100%',marginTop: '50px',padding:'10px' ,justifyContent: 'space-evenly', alignItems :'center' }}>
+      <div style={{ display: 'flex', width: '100%', marginTop: '50px', padding: '10px', justifyContent: 'space-evenly', alignItems: 'center' }}>
         <Steps current={current}>
           {steps && steps.map(item => (
             <Step key={item.titulo} title={item.titulo} icon={item.icone ?? item.icone} />
@@ -64,7 +64,7 @@ function HomeCadastro() {
                 Cancelar
               </Button>
             </>
-          )} {current >= 0 && (
+          )} {current > 0 && (
             <Button type="primary" onClick={() => prev()}>
               Voltar
             </Button>
@@ -76,7 +76,7 @@ function HomeCadastro() {
           )}
         </Space>
       </div>
-  </S.Container>
+    </S.Container>
   )
 }
 

@@ -11,6 +11,7 @@ const Container = styled.div`
   height: 400px;
   background-color: #f5f5f5;
   padding: 20px;
+  
 `;
 
 const ContainerFormulario = styled.div`

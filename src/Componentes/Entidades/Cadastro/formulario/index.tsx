@@ -1,30 +1,34 @@
-import { Form, Input, InputNumber } from 'antd';
-import { useState } from 'react';
-import { Formulario, Produto } from '../../../../libs/Interfaces';
+import { Button, Form, Input, InputNumber } from 'antd';
+import { useCallback, useContext } from 'react';
+import { Produto } from '../../../../libs/Interfaces';
+import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
 import S from '../../../../libs/Util/Styles/style';
 
 function FormCadastroA() {
+  const { cadastroValores, guardarValores } = useContext(CadastroContext)
   const [form] = Form.useForm()
-  const [dadosForm, setDadosForm] = useState<Produto>()
+  const inicialValues = useCallback(() => {
+      form.setFieldsValue(cadastroValores)
+  }, [cadastroValores])
 
-  function enviarDados({ dados }: Formulario) {
+  function enviarDados() {
     form.validateFields().then(async (res) => {
       const dados: Produto = form.getFieldsValue(true)
-      setDadosForm(dados)
+      guardarValores(dados as Produto)
     }).catch(err => {
       alert(err)
     })
   }
-  console.log(dadosForm)
+  console.log(cadastroValores)
   return (
     <S.Container>
       <S.ContainerFormulario>
         <Form form={form}
           initialValues={{
-            nomeProduto: dadosForm?.nomeProduto,
-            tipo: dadosForm?.tipo,
-            valor: dadosForm?.valor,
-            descricao: dadosForm?.descricao
+            nomeProduto: cadastroValores?.nomeProduto,
+            tipo: cadastroValores?.tipo,
+            valor: cadastroValores?.valor,
+            descricao: cadastroValores?.descricao
           }}
         >
           <Form.Item name={['nomeProduto']} label="Nome Produto :" required rules={[{ required: true }]}>
@@ -38,6 +42,11 @@ function FormCadastroA() {
           </Form.Item>
           <Form.Item name={['descricao']} label="Descrição :">
             <Input.TextArea />
+          </Form.Item>
+          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Button type="primary" onClick={enviarDados}>
+              Sub
+            </Button>
           </Form.Item>
         </Form>
       </S.ContainerFormulario>

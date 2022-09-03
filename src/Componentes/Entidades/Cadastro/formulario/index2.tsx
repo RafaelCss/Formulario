@@ -1,30 +1,46 @@
-import { Form, Input, InputNumber } from 'antd';
-import { Formulario, Produto } from '../../../../libs/Interfaces';
+import { Button, Form, Input } from 'antd';
+import { useCallback, useContext } from 'react';
+import { Produto } from '../../../../libs/Interfaces';
+import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
 import S from '../../../../libs/Util/Styles/style';
 
 function FormCadastroB() {
+  const [form] = Form.useForm()
+  const { cadastroValores, guardarValores } = useContext(CadastroContext)
 
-  const [form ]= Form.useForm()
-  function enviarDados( {dados} : Formulario) {
-    form.validateFields().then( async(res) =>{
-       const dados : Produto = form.getFieldsValue(true)
-    }).catch(err =>{
+  const inicialValues = useCallback(() => {
+      form.setFieldsValue(cadastroValores)
+  }, [cadastroValores])
+  function enviarDados() {
+    form.validateFields().then(async (res) => {
+      const dados: Produto = form.getFieldsValue(true)
+      guardarValores(dados)
+    }).catch(err => {
       alert(err)
     })
   }
-  console.log(form.getFieldsValue())
+  console.log(cadastroValores)
   return (
     <S.Container>
-      <Form form={form}>
+      <Form
+        initialValues={{
+          nomeFornecedor: cadastroValores?.nomeFornecedor,
+          email: cadastroValores?.email,
+          telefone: cadastroValores?.telefone
+        }}
+        form={form}>
         <Form.Item name={['nomeFornecedor']} label="Fornecedor :" required rules={[]}>
           <Input />
         </Form.Item>
         <Form.Item name={['email']} required label="Email fornecedor :">
           <Input />
         </Form.Item>
-        <Form.Item name={['Telefone']} label="Telefone :">
+        <Form.Item name={['telefone']} label="Telefone :">
           <Input />
         </Form.Item>
+        <Button type="primary" onClick={enviarDados}>
+          Sub
+        </Button>
       </Form>
     </S.Container>
   )

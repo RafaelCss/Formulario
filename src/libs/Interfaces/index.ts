@@ -38,7 +38,7 @@ export interface IsAuthenticate {
 export interface Produto {
   nomeProduto : string
   tipo : string
-  valor : string
+  valor : number
   descricao : string
   nomeFornecedor : string
   email : string
