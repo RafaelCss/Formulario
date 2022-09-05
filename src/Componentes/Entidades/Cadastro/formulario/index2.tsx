@@ -1,24 +1,38 @@
 import { Button, Form, Input } from 'antd';
-import { useCallback, useContext } from 'react';
+import { forwardRef, useCallback, useContext, useImperativeHandle } from 'react';
 import { Produto } from '../../../../libs/Interfaces';
 import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
 import S from '../../../../libs/Util/Styles/style';
 
-function FormCadastroB() {
+
+
+export interface SalvarDadosFormB{
+  salvarDados : () => Promise<void>
+}
+
+
+
+const FormCadastroB = forwardRef((__, ref) => {
   const [form] = Form.useForm()
   const { cadastroValores, guardarValores } = useContext(CadastroContext)
 
   const inicialValues = useCallback(() => {
     form.setFieldsValue(cadastroValores)
   }, [cadastroValores])
-  function enviarDados() {
-    form.validateFields().then(async (res) => {
-      const dados: Produto = form.getFieldsValue(true)
-      guardarValores(dados)
-    }).catch(err => {
-      alert(err)
-    })
-  }
+
+
+
+  useImperativeHandle(ref,()=>({
+    salvarDados : async () =>{
+     await  form.validateFields().then(async (res) => {
+        const dados: Produto = form.getFieldsValue(true)
+        guardarValores(dados)
+      }).catch(err => {
+        alert(err)
+      })
+    }
+  }))
+
   console.log(cadastroValores)
   return (
     <S.Container>
@@ -41,7 +55,7 @@ function FormCadastroB() {
       </Form>
     </S.Container>
   )
-}
+})
 
 
 export default FormCadastroB;

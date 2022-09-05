@@ -1,25 +1,29 @@
 import { Button, Form, Input, InputNumber, Select } from 'antd';
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, forwardRef, useImperativeHandle } from 'react';
 import { Produto } from '../../../../libs/Interfaces';
 import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
 import S from '../../../../libs/Util/Styles/style';
+const { Option } = Select;
 
-function FormCadastroA() {
+export interface SalvarDadosFormA {
+  salvarDados: () => Promise<void>
+}
+
+const FormCadastroA = forwardRef((__, ref) => {
   const { cadastroValores, guardarValores } = useContext(CadastroContext)
   const [form] = Form.useForm()
 
-  /*   const inicialValues = useCallback(() => {
-        form.setFieldsValue(cadastroValores)
-    }, [cadastroValores])
-   */
-  function enviarDados() {
-    form.validateFields().then(async (res) => {
-      const dados: Produto = form.getFieldsValue(true)
-      guardarValores(dados as Produto)
-    }).catch(err => {
-      alert(err)
-    })
-  }
+  const inicialValues = useCallback(() => {
+    form.setFieldsValue(cadastroValores)
+  }, [cadastroValores])
+
+  useImperativeHandle(ref, () => ({
+    salvarDados: async () => {
+      await form.validateFields().then(async dados =>
+        guardarValores(dados)
+      );
+    }
+  }))
 
   function limparFormulario() {
     form.resetFields()
@@ -39,14 +43,26 @@ function FormCadastroA() {
           <Form.Item name={['nomeProduto']} label="Nome Produto :" required rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['tipo']} required label="Tipo Produto :">
-            <Select />
+          <Form.Item name={['tipo']} required label="Tipo Produto :" rules={[{ required: true }]}>
+            <Select>
+              <>
+                <Option value={1}>
+                  Higiene
+                </Option>
+                <Option value={2}>
+                  Limpeza
+                </Option>
+                <Option value={3}>
+                  Perecível
+                </Option>
+              </>
+            </Select>
           </Form.Item>
-          <Form.Item name={['valor']} label="Valor :" required rules={[{ required : true }]}>
+          <Form.Item name={['valor']} label="Valor :" required rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name={['descricao']} label="Descrição :">
-            <Input.TextArea showCount  maxLength={200}/>
+            <Input.TextArea showCount maxLength={200} />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           </Form.Item>
@@ -54,7 +70,7 @@ function FormCadastroA() {
       </S.ContainerFormulario>
     </S.Container>
   )
-}
+})
 
 
 export default FormCadastroA;

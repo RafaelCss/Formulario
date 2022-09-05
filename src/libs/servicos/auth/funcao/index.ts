@@ -13,7 +13,7 @@ export async function salvarToken(dados: IsAuthenticate) {
    if(user){
     return JSON.parse(user)
    }
-    return   user ;
+    return 'user' ;
 }
 
 export function deleteToken() {

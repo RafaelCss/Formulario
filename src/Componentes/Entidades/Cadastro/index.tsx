@@ -1,42 +1,58 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Button,Space, Steps } from 'antd';
-import { useContext, useState } from 'react';
-import { ListaProdutos } from '../../../libs/Interfaces';
+import { useContext, useRef, useState } from 'react';
+import { ListaProdutos, Produto } from '../../../libs/Interfaces';
 import { CadastroContext } from '../../../libs/servicos/ContextoCadastro';
+import api from '../../../libs/servicos/rotas/config';
+import { cadastrarProdutos } from '../../../libs/servicos/rotas/Produtos/cadastro';
 import S from "../../../libs/Util/Styles/style";
-import FormCadastroA from './formulario/index';
-import FormCadastroB from './formulario/index2';
+import FormCadastroA,{SalvarDadosFormA} from './formulario/index';
+import FormCadastroB, {SalvarDadosFormB} from './formulario/index2';
 const { Step } = Steps;
 
 function HomeCadastro() {
   const [current, setCurrent] = useState(0);
-  const [produtos , setProdutos] = useState<ListaProdutos>()
-  const {buscar} = useContext(CadastroContext)
+  const formCadastroA = useRef<SalvarDadosFormA>(null)
+  const formCadastroB = useRef<SalvarDadosFormB>(null)
+  const {cadastroValores} =useContext(CadastroContext)
+  //const [produtos , setProdutos] = useState<ListaProdutos>()
 
 
   const next = () => {
-    setCurrent(current + 1);
+    formCadastroA.current?.salvarDados().then(res =>{
+      setCurrent(current + 1);
+    })
   };
 
   const prev = () => {
     setCurrent(current - 1);
   };
 
+
+  const submit= () => {
+    formCadastroB.current?.salvarDados().then(async (res) =>{
+      await cadastrarProdutos(cadastroValores as Produto).then(
+       async( res) =>  alert(JSON.stringify(res))
+      )
+    })
+  }
+
   const steps = [
     {
       titulo: 'Produto',
-      conteudo: <FormCadastroA />,
+      conteudo: <FormCadastroA ref={formCadastroA} />,
       id: 1,
       icone: <UserOutlined />
 
     },
     {
       titulo: 'Fornecedor',
-      conteudo: <FormCadastroB />,
+      conteudo: <FormCadastroB  ref={formCadastroB}/>,
       id: 2,
       icone: <UserOutlined />
     },
   ];
+
 
 
   return (
@@ -68,7 +84,7 @@ function HomeCadastro() {
           )}
           {current === steps.length - 1 && (
             <>
-              <Button type="primary" onClick={() => alert('Cadastro enviado')}>
+              <Button type="primary" onClick={() => submit()}>
                 Cadastrar
               </Button>
               <Button danger onClick={() => console.log('oi')}>
