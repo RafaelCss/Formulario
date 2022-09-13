@@ -27,6 +27,7 @@ const FormCadastroB = forwardRef((__, ref) => {
      await  form.validateFields().then(async (res) => {
         const dados: Produto = form.getFieldsValue(true)
         guardarValores(dados)
+        inicialValues()
       }).catch(err => {
         alert(err)
       })

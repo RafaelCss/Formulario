@@ -1,15 +1,30 @@
 import axios from 'axios';
-import { IsAuthenticate } from '../../Interfaces';
-import { buscarToken } from '../auth/funcao';
-const user : IsAuthenticate =  buscarToken() ;
-console.log(user.token)
+import { parseCookies } from 'nookies'
+
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL_LOCAL,
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  timeout: 3000,
 })
+api.interceptors.request.use(config => {
+  const token = sessionStorage.getItem('token');
+  return {
+    ...config,
+    headers: {
+      ...config.headers,
+      Authorization: token ? token : undefined
+    }
+  };
+});
 
-if (user && user?.auth === true) {
-  api.defaults.headers.common['Authorization'] = user?.token as string;
-}
+api.interceptors.response.use(
+  config => config,
+  error => Promise.reject(error)
+);
+
+
 export default api;
 
 

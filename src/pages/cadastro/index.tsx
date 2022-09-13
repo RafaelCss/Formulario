@@ -19,7 +19,7 @@ function Cadastro() {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { ['user']: token } = parseCookies(ctx)
-  const user: IsAuthenticate =await JSON.parse(token) ? JSON.parse(token) :  false
+  const user: IsAuthenticate = token && token ? JSON.parse(token) :  false
 
   if (!user.auth) {
     return {
