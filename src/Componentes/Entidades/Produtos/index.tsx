@@ -1,7 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Button, Space, Steps } from 'antd';
 import { useContext, useRef, useState } from 'react';
-import { Produto } from '../../../libs/Interfaces';
+import { IsAuthenticate, Produto } from '../../../libs/Interfaces';
 import { CadastroContext } from '../../../libs/servicos/ContextoCadastro';
 import { cadastrarProdutos } from '../../../libs/servicos/rotas/Produtos/cadastro';
 import S from "../../../libs/Util/Styles/style";
@@ -9,11 +9,13 @@ import FormCadastroA, { SalvarDadosFormA } from './formulario/index';
 import FormCadastroB, { SalvarDadosFormB } from './formulario/index2';
 const { Step } = Steps;
 
-function HomeCadastro() {
+function HomeCadastro({usuario} : IsAuthenticate) {
   const [current, setCurrent] = useState(0);
   const formCadastroA = useRef<SalvarDadosFormA>(null)
   const formCadastroB = useRef<SalvarDadosFormB>(null)
   const { cadastroValores } = useContext(CadastroContext)
+
+
 
   const next = () => {
     formCadastroA.current?.salvarDados().then(res => {
@@ -41,14 +43,14 @@ function HomeCadastro() {
 
   const steps = [
     {
-      titulo: 'Produto',
+      titulo: <p style={{color:'white'}}>Produto</p>,
       conteudo: <FormCadastroA ref={formCadastroA} />,
       id: 1,
-      icone: <UserOutlined />
+      icone: <UserOutlined  />
 
     },
     {
-      titulo: 'Fornecedor',
+      titulo: <p style={{color:'white'}}>Fornecedor</p>,
       conteudo: <FormCadastroB ref={formCadastroB} />,
       id: 2,
       icone: <UserOutlined />
@@ -56,12 +58,13 @@ function HomeCadastro() {
   ];
 
   return (
-    <S.Container>
+      <S.ContainerFormulario>
+        <S.ContainerNomeUsuario>Seja bem vindo {usuario} !</S.ContainerNomeUsuario>
       <>
-        <div style={{ display: 'flex', width: '100%', marginTop: '50px', padding: '10px', justifyContent: 'space-evenly', alignItems: 'center' }}>
+        <div style={{ display: 'flex', width: '100%', padding: '10px', justifyContent: 'space-evenly', alignItems: 'center' }}>
           <Steps current={current}>
             {steps && steps.map(item => (
-              <Step key={item.titulo} title={item.titulo} icon={item.icone ?? item.icone} />
+              <Step key={item.id} title={item.titulo} icon={item.icone ?? item.icone} />
             ))}
           </Steps>
         </div>
@@ -94,9 +97,8 @@ function HomeCadastro() {
             )}
           </Space>
         </div>
-
       </>
-    </S.Container >
+      </S.ContainerFormulario>
   )
 }
 

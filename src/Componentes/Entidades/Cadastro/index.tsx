@@ -32,7 +32,7 @@ function CadastroUsuario() {
   return (
     <S.Container>
       <S.ContainerTitulo>
-        <h1> Faça seu Cadastro </h1>
+        <h1>Faça seu Cadastro</h1>
       </S.ContainerTitulo>
         <Form
           form={form}

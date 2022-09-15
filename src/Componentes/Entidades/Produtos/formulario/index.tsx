@@ -15,7 +15,10 @@ const FormCadastroA = forwardRef((__, ref) => {
   const [form] = Form.useForm()
 
   const inicialValues = useCallback(() => {
-    form.setFieldsValue(cadastroValores)
+    if (form) {
+      form.setFieldsValue(cadastroValores)
+    }
+    form.resetFields()
   }, [cadastroValores])
 
   useImperativeHandle(ref, () => ({
@@ -33,8 +36,7 @@ const FormCadastroA = forwardRef((__, ref) => {
     form.resetFields()
   }
   return (
-    <S.Container>
-      <S.ContainerFormulario>
+    <S.ContainerFormulario>
         <Form form={form}
           layout="vertical"
           initialValues={{
@@ -85,8 +87,7 @@ const FormCadastroA = forwardRef((__, ref) => {
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           </Form.Item>
         </Form>
-      </S.ContainerFormulario>
-    </S.Container>
+    </S.ContainerFormulario>
   )
 })
 

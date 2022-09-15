@@ -35,6 +35,10 @@ export interface IsAuthenticate {
   usuario ?: string
 }
 
+export interface DadosAuthenticate{
+ [ user : string ] : IsAuthenticate
+}
+
 export interface ListaProdutos{
   dados : Produto
 }

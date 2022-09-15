@@ -12,8 +12,7 @@ function Produtos({usuario} : any) {
         <title>Cadastro de Produtos</title>
         <meta name="description" content="Gerenciador de produtos e fornecedores" />
       </Head>
-      <p>{usuario}</p>
-      <HomeCadastro />
+      <HomeCadastro usuario={usuario} />
     </>
   )
 }
@@ -33,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
-      usuario : user.usuario
+      usuario :user.usuario
     },
   }
 }

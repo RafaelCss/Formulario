@@ -14,6 +14,8 @@ export const CadastroContext: React.Context<ProdutoContext> = createContext<Prod
 
 export function CadastroProvider({ children }: Props) {
   const [cadastroValores, setCadastroValores] = useState<Produto>()
+  const [dadoUser ,setDadosUser] = useState()
+
 
   function guardarValores(dados: Produto) {
     setCadastroValores((values: any) => {

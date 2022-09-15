@@ -15,41 +15,44 @@ function FormLogin() {
     })
   }
   return (
-    <S.Container>
-      <S.ContainerTitulo>
-        <h1>Faça login : </h1>
-      </S.ContainerTitulo>
-      <Form
-        form={form}
-        layout="vertical"
-      >
-        <Form.Item
-          label={<S.TitleLabel>Email</S.TitleLabel>}
-          name={["email"]}
-          required
-          style={{ color: 'green' }}
-          rules={[{ message: 'Insira seu Email!' }]}
-        >
-          <Input name='email' />
-        </Form.Item>
 
-        <Form.Item
-          label={<S.TitleLabel>Senha</S.TitleLabel>}
-          name={["senha"]}
-          required
-          rules={[{ message: 'Insira sua Senha!' }]}
+    <S.Container>
+      <S.ContainerFormulario>
+        <S.ContainerTitulo>
+          <h1>Faça Login </h1>
+        </S.ContainerTitulo>
+        <Form
+          form={form}
+          layout="vertical"
         >
-          <Input.Password name='senha' />
-        </Form.Item>
-        <S.ContainerBotao>
-          <S.BotaoPadrao onClick={() => enviarDados()}>Logar</S.BotaoPadrao>
-        </S.ContainerBotao>
-      </Form>
-      <Space>
-        <Link href={'/cadastro'}>
-          <a>Ainda não tenho cadastro</a>
-        </Link>
-      </Space>
+          <Form.Item
+            label={<S.TitleLabel>Email</S.TitleLabel>}
+            name={["email"]}
+            required
+            style={{ color: 'green' }}
+            rules={[{ message: 'Insira seu Email!' }]}
+          >
+            <Input name='email' />
+          </Form.Item>
+
+          <Form.Item
+            label={<S.TitleLabel>Senha</S.TitleLabel>}
+            name={["senha"]}
+            required
+            rules={[{ message: 'Insira sua Senha!' }]}
+          >
+            <Input.Password name='senha' />
+          </Form.Item>
+          <S.ContainerBotao>
+            <S.BotaoPadrao onClick={() => enviarDados()}>Logar</S.BotaoPadrao>
+          </S.ContainerBotao>
+        </Form>
+        <Space>
+          <Link href={'/cadastro'}>
+            <a>Ainda não tenho cadastro</a>
+          </Link>
+        </Space>
+      </S.ContainerFormulario>
     </S.Container>
   );
 };

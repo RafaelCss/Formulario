@@ -7,19 +7,22 @@ background-color: black;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  justify-content: space-around;
+  width: 100vw;
+  height: 100vh;
   background-color: black;
   color: green;
   padding: 20px;
+  @media screen and (max-width:412px) {
+    flex-direction: column;
+  }
 `;
 
 const ContainerFormulario = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -27,9 +30,6 @@ const ContainerFormulario = styled.div`
   background-color: black;
   color: green;
   padding: 20px;
-  span{
-    color: green;
-  }
 `;
 
 
@@ -66,14 +66,20 @@ const ContainerTitulo = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
-  width: 50%;
-  margin: 20px 0px 30px 10px;
+  width: 30%;
+  height: auto;
+  margin: 20px 0px 0px 10px;
   height: 50px;
   h1 {
     color: #CF3BEB;
   }
 `;
 
+const ContainerNomeUsuario = styled.div`
+font-size: 20px;
+color: white;
+
+`
 
 
-export default { Container, ContainerFormulario, ContainerBotao, ContainerTitulo, TitleLabel, BotaoPadrao , Body};
+export default { Container, ContainerFormulario, ContainerBotao, ContainerTitulo, TitleLabel, BotaoPadrao, Body, ContainerNomeUsuario };

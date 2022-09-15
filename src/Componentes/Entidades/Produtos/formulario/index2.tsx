@@ -1,5 +1,6 @@
 import { Button, Form, Input } from 'antd';
-import { forwardRef, useCallback, useContext, useImperativeHandle } from 'react';
+import { forwardRef, useCallback, useContext, useImperativeHandle, useRef } from 'react';
+import { SalvarDadosFormA } from '.';
 import { Produto } from '../../../../libs/Interfaces';
 import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
 import S from '../../../../libs/Util/Styles/style';
@@ -10,6 +11,7 @@ export interface SalvarDadosFormB {
 
 const FormCadastroB = forwardRef((__, ref) => {
   const [form] = Form.useForm()
+  const formCadastroA = useRef<SalvarDadosFormA>(null)
   const { cadastroValores, guardarValores } = useContext(CadastroContext)
 
   const inicialValues = useCallback(() => {
@@ -26,14 +28,15 @@ const FormCadastroB = forwardRef((__, ref) => {
         alert(err)
       })
     },
-    limparFormulario: () => { form.resetFields() }
+    limparFormulario: () => limparFormulario()
   }))
 
   function limparFormulario() {
+    formCadastroA.current?.limparFormulario()
     form.resetFields()
   }
   return (
-    <S.Container>
+    <S.ContainerFormulario>
       <Form
         layout="vertical"
         initialValues={{
@@ -60,7 +63,7 @@ const FormCadastroB = forwardRef((__, ref) => {
           <Input />
         </Form.Item>
       </Form>
-    </S.Container>
+    </S.ContainerFormulario>
   )
 })
 
