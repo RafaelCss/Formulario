@@ -7,6 +7,7 @@ const { Option } = Select;
 
 export interface SalvarDadosFormA {
   salvarDados: () => Promise<void>
+  limparFormulario : () => void
 }
 
 const FormCadastroA = forwardRef((__, ref) => {
@@ -22,13 +23,15 @@ const FormCadastroA = forwardRef((__, ref) => {
       await form.validateFields().then(async dados =>
         guardarValores(dados)
       );
-    }
+      inicialValues()
+    },
+    limparFormulario:() =>{  limparFormulario()}
   }))
+  
 
-  function limparFormulario() {
+  function  limparFormulario() {
     form.resetFields()
   }
-
   return (
     <S.Container>
       <S.ContainerFormulario>

@@ -9,9 +9,10 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 400px;
-  background-color: #f5f5f5;
+  background-color: black;
+  color: green;
   padding: 20px;
-  
+
 `;
 
 const ContainerFormulario = styled.div`
@@ -21,7 +22,8 @@ const ContainerFormulario = styled.div`
   justify-content: center;
   width: 100%;
   height: 30%;
-  background-color: #f5f5f5;
+  background-color: black;
+  color: green;
   padding: 20px;
 `;
 
@@ -32,12 +34,14 @@ const ContainerBotao = styled.div`
   justify-content: center;
   width: 100%;
   height: 30%;
-  background-color: #f5f5f5;
+  background-color: black;
+  color: green;
   padding: 20px;
 `;
 
 const ContainerTitulo = styled.div`
   display: flex;
+  color: green;
   flex-wrap: nowrap;
   text-align: center;
   align-items: center;
@@ -46,7 +50,7 @@ const ContainerTitulo = styled.div`
   margin: 20px 0px 30px 0px;
   height: 50px;
   h1{
-    color: black;
+    color: green;
   }
 `;
 

@@ -3,14 +3,10 @@ import { forwardRef, useCallback, useContext, useImperativeHandle } from 'react'
 import { Produto } from '../../../../libs/Interfaces';
 import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
 import S from '../../../../libs/Util/Styles/style';
-
-
-
 export interface SalvarDadosFormB{
   salvarDados : () => Promise<void>
+  limparFormulario : () => void
 }
-
-
 
 const FormCadastroB = forwardRef((__, ref) => {
   const [form] = Form.useForm()
@@ -20,21 +16,22 @@ const FormCadastroB = forwardRef((__, ref) => {
     form.setFieldsValue(cadastroValores)
   }, [cadastroValores])
 
-
-
   useImperativeHandle(ref,()=>({
     salvarDados : async () =>{
      await  form.validateFields().then(async (res) => {
-        const dados: Produto = form.getFieldsValue(true)
+        const dados: Produto =await form.getFieldsValue(true)
         guardarValores(dados)
         inicialValues()
       }).catch(err => {
         alert(err)
       })
-    }
+    },
+    limparFormulario:() =>{  limparFormulario()}
   }))
 
-  console.log(cadastroValores)
+function  limparFormulario() {
+  form.resetFields()
+}
   return (
     <S.Container>
       <Form

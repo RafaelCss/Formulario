@@ -17,6 +17,7 @@ export interface IUser {
   senha: string
 }
 
+
 export interface CadastroUser {
   email: string
   senha: string

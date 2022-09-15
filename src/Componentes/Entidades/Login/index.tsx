@@ -1,15 +1,16 @@
-import { Button,Form, Input } from 'antd';
+import { Button, Form, Input, Space } from 'antd';
 import S from '../../../libs/Util/Styles/style';
 import app from '../../../libs/servicos/auth/login'
 import { IUser } from '../../../libs/Interfaces';
+import Link from 'next/link';
 
 function FormLogin() {
   const [form] = Form.useForm()
- function enviarDados() {
-    form.validateFields().then( async(res) =>{
-       const dados : IUser = form.getFieldsValue(true)
-       const salvar = await app.logar(dados).then(res => {return res})
-    }).catch(err =>{
+  function enviarDados() {
+    form.validateFields().then(async (res) => {
+      const dados: IUser = form.getFieldsValue(true)
+      const salvar = await app.logar(dados).then(res => { return res })
+    }).catch(err => {
       alert(err)
     })
   }
@@ -21,7 +22,6 @@ function FormLogin() {
       <S.ContainerFormulario>
         <Form
           form={form}
-
         >
           <Form.Item
             label="Email"
@@ -45,9 +45,15 @@ function FormLogin() {
           </S.ContainerBotao>
         </Form>
       </S.ContainerFormulario>
+      <Space>
+        <Link href={'/cadastro'}>
+          <a>Ainda não tem cadastro ?</a>
+        </Link>
+      </Space>
     </S.Container>
   );
 };
+
 
 export default FormLogin;
 
