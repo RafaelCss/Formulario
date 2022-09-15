@@ -19,20 +19,28 @@ function CadastroUsuario() {
       )
     })
   }
-
+  const validateMessages = {
+    required: '${email} is required!',
+    types: {
+      email: '${email} is not a valid email!'
+    },
+    number: {
+      range: '${label} must be between ${min} and ${max}',
+    },
+  };
 
   return (
     <S.Container>
       <S.ContainerTitulo>
         <h1> Faça seu Cadastro </h1>
       </S.ContainerTitulo>
-      <S.ContainerFormulario>
         <Form
           form={form}
-
+          validateMessages={validateMessages}
+          layout="vertical"
         >
           <Form.Item
-            label="Email"
+            label={<S.TitleLabel>Email</S.TitleLabel>}
             name={["email"]}
             required
             rules={[
@@ -41,15 +49,15 @@ function CadastroUsuario() {
             <Input name='email' />
           </Form.Item>
           <Form.Item
-            label="Nome"
+            label={<S.TitleLabel>Nome</S.TitleLabel>}
             name={["nome"]}
             required
-            rules={[,{ message: 'Insira seu Nome!' }]}
+            rules={[{ message: 'Insira seu Nome!' }]}
           >
             <Input name='nome' />
           </Form.Item>
           <Form.Item
-            label="Senha"
+            label={<S.TitleLabel>Senha</S.TitleLabel>}
             name={["senha"]}
             required
             rules={[{ message: 'Insira sua Senha!' }]}
@@ -57,10 +65,9 @@ function CadastroUsuario() {
             <Input.Password name='senha' />
           </Form.Item>
           <S.ContainerBotao>
-            <Button onClick={() => enviarDados()}>Cadastrar</Button>
+            <S.BotaoPadrao onClick={() => enviarDados()}>Cadastrar</S.BotaoPadrao>
           </S.ContainerBotao>
         </Form>
-      </S.ContainerFormulario>
     </S.Container>
   );
 };

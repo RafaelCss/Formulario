@@ -19,35 +19,35 @@ function FormLogin() {
       <S.ContainerTitulo>
         <h1>Faça login : </h1>
       </S.ContainerTitulo>
-      <S.ContainerFormulario>
-        <Form
-          form={form}
+      <Form
+        form={form}
+        layout="vertical"
+      >
+        <Form.Item
+          label={<S.TitleLabel>Email</S.TitleLabel>}
+          name={["email"]}
+          required
+          style={{ color: 'green' }}
+          rules={[{ message: 'Insira seu Email!' }]}
         >
-          <Form.Item
-            label="Email"
-            name={["email"]}
-            required
-            rules={[{ message: 'Insira seu Email!' }]}
-          >
-            <Input name='email' />
-          </Form.Item>
+          <Input name='email' />
+        </Form.Item>
 
-          <Form.Item
-            label="Senha"
-            name={["senha"]}
-            required
-            rules={[{ message: 'Insira sua Senha!' }]}
-          >
-            <Input.Password name='senha' />
-          </Form.Item>
-          <S.ContainerBotao>
-            <Button onClick={() => enviarDados()}>Logar</Button>
-          </S.ContainerBotao>
-        </Form>
-      </S.ContainerFormulario>
+        <Form.Item
+          label={<S.TitleLabel>Senha</S.TitleLabel>}
+          name={["senha"]}
+          required
+          rules={[{ message: 'Insira sua Senha!' }]}
+        >
+          <Input.Password name='senha' />
+        </Form.Item>
+        <S.ContainerBotao>
+          <S.BotaoPadrao onClick={() => enviarDados()}>Logar</S.BotaoPadrao>
+        </S.ContainerBotao>
+      </Form>
       <Space>
         <Link href={'/cadastro'}>
-          <a>Ainda não tem cadastro ?</a>
+          <a>Ainda não tenho cadastro</a>
         </Link>
       </Space>
     </S.Container>

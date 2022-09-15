@@ -8,11 +8,13 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 400px;
+  height: 100%;
   background-color: black;
   color: green;
   padding: 20px;
-
+  body{
+    background-color: black;
+  }
 `;
 
 const ContainerFormulario = styled.div`
@@ -25,7 +27,11 @@ const ContainerFormulario = styled.div`
   background-color: black;
   color: green;
   padding: 20px;
+  span{
+    color: green;
+  }
 `;
+
 
 const ContainerBotao = styled.div`
   display: flex;
@@ -34,10 +40,23 @@ const ContainerBotao = styled.div`
   justify-content: center;
   width: 100%;
   height: 30%;
-  background-color: black;
-  color: green;
   padding: 20px;
 `;
+
+const BotaoPadrao = styled.button`
+    color : black ;
+    font-weight: 500;
+    border-radius: 0%;
+    border: none;
+    width: 200px;
+    height: 35px;
+    background-color: #CF3BEB;
+    box-shadow: 11px -8px 30px 11px rgba(245,8,229,0.18)
+`
+
+const TitleLabel = styled.label`
+  color: #CF3BEB;
+`
 
 const ContainerTitulo = styled.div`
   display: flex;
@@ -47,13 +66,13 @@ const ContainerTitulo = styled.div`
   align-items: center;
   justify-content: center;
   width: 50%;
-  margin: 20px 0px 30px 0px;
+  margin: 20px 0px 30px 10px;
   height: 50px;
-  h1{
-    color: green;
+  h1 {
+    color: #CF3BEB;
   }
 `;
 
 
 
-export default { Container, ContainerFormulario, ContainerBotao, ContainerTitulo };
+export default { Container, ContainerFormulario, ContainerBotao, ContainerTitulo, TitleLabel, BotaoPadrao };
