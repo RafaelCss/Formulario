@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+const Body = styled.body`
+background-color: black;
+`
 
 
 const Container = styled.div`
@@ -12,9 +15,6 @@ const Container = styled.div`
   background-color: black;
   color: green;
   padding: 20px;
-  body{
-    background-color: black;
-  }
 `;
 
 const ContainerFormulario = styled.div`
@@ -49,9 +49,10 @@ const BotaoPadrao = styled.button`
     border-radius: 0%;
     border: none;
     width: 200px;
-    height: 35px;
+    height: 40px;
+    border-radius: 32px 32px 32px 32px;
     background-color: #CF3BEB;
-    box-shadow: 11px -8px 30px 11px rgba(245,8,229,0.18)
+    box-shadow: 11px -8px 30px 11px rgba(245,8,229,0.18);
 `
 
 const TitleLabel = styled.label`
@@ -75,4 +76,4 @@ const ContainerTitulo = styled.div`
 
 
 
-export default { Container, ContainerFormulario, ContainerBotao, ContainerTitulo, TitleLabel, BotaoPadrao };
+export default { Container, ContainerFormulario, ContainerBotao, ContainerTitulo, TitleLabel, BotaoPadrao , Body};

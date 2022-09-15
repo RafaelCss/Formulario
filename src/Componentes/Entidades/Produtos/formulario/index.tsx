@@ -7,7 +7,7 @@ const { Option } = Select;
 
 export interface SalvarDadosFormA {
   salvarDados: () => Promise<void>
-  limparFormulario : () => void
+  limparFormulario: () => void
 }
 
 const FormCadastroA = forwardRef((__, ref) => {
@@ -25,17 +25,18 @@ const FormCadastroA = forwardRef((__, ref) => {
       );
       inicialValues()
     },
-    limparFormulario:() =>{  limparFormulario()}
+    limparFormulario: () => { form.resetFields() }
   }))
-  
 
-  function  limparFormulario() {
+
+  function limparFormulario() {
     form.resetFields()
   }
   return (
     <S.Container>
       <S.ContainerFormulario>
         <Form form={form}
+          layout="vertical"
           initialValues={{
             nomeProduto: cadastroValores?.nomeProduto,
             tipo: cadastroValores?.tipo,
@@ -43,10 +44,18 @@ const FormCadastroA = forwardRef((__, ref) => {
             descricao: cadastroValores?.descricao
           }}
         >
-          <Form.Item name={['nomeProduto']} label="Nome Produto :" required rules={[{ required: true }]}>
+          <Form.Item
+            name={['nomeProduto']}
+            label={<S.TitleLabel>Nome Produto :</S.TitleLabel>}
+            required
+            rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['tipo']} required label="Tipo Produto :" rules={[{ required: true }]}>
+          <Form.Item
+            name={['tipo']}
+            required
+            label={<S.TitleLabel>Tipo Produto :</S.TitleLabel>}
+            rules={[{ required: true }]}>
             <Select>
               <>
                 <Option value={1}>
@@ -61,10 +70,16 @@ const FormCadastroA = forwardRef((__, ref) => {
               </>
             </Select>
           </Form.Item>
-          <Form.Item name={['valor']} label="Valor :" required rules={[{ required: true }]}>
+          <Form.Item
+            name={['valor']}
+            label={<S.TitleLabel>Valor :</S.TitleLabel>}
+            required
+            rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['descricao']} label="Descrição :">
+          <Form.Item
+            name={['descricao']}
+            label={<S.TitleLabel>Descrição :</S.TitleLabel>}>
             <Input.TextArea showCount maxLength={200} />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

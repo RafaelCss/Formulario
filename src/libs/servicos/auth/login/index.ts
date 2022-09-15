@@ -12,7 +12,7 @@ async function logar(dados: CadastroUser) {
     const {dados} = await res.data
     if(dados.auth == true){
       await salvarToken(dados)
-      rota.push('/cadastro')
+      rota.push('/produtos')
       }
     })
     .catch(err => { return err })

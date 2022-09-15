@@ -5,13 +5,14 @@ import HomeCadastro from '../../Componentes/Entidades/Produtos'
 import { IsAuthenticate } from '../../libs/Interfaces'
 
 
-function Produtos() {
+function Produtos({usuario} : any) {
   return (
     <>
       <Head>
         <title>Cadastro de Produtos</title>
         <meta name="description" content="Gerenciador de produtos e fornecedores" />
       </Head>
+      <p>{usuario}</p>
       <HomeCadastro />
     </>
   )
@@ -31,7 +32,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 
   return {
-    props: {},
+    props: {
+      usuario : user.usuario
+    },
   }
 }
 

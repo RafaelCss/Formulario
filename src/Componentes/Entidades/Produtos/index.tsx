@@ -29,7 +29,7 @@ function HomeCadastro() {
   const submit = () => {
     formCadastroB.current?.salvarDados().then(async () => {
       const resposta = await cadastrarProdutos(cadastroValores as Produto).then(res => {
-        res
+        console.log(res)
       })
     })
   }
