@@ -10,9 +10,13 @@
     "Isteps",
     "logado",
     "logar",
+    "Maiuscula",
+    "Minuscula",
     "Padrao",
     "perecivel",
-    "usuario"
+    "usuario",
+    "Validacao",
+    "Visivel"
   ],
   "material-icon-theme.activeIconPack": "react",
   "material-icon-theme.showWelcomeMessage": false
