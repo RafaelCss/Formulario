@@ -3,6 +3,7 @@ import { useCallback, useContext, forwardRef, useImperativeHandle } from 'react'
 import { Produto } from '../../../../libs/Interfaces';
 import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
 import S from '../../../../libs/Util/Styles/style';
+import { InputAnt } from '../../../Inputs/inputTexto/style';
 const { Option } = Select;
 
 export interface SalvarDadosFormA {
@@ -51,7 +52,7 @@ const FormCadastroA = forwardRef((__, ref) => {
             label={<S.TitleLabel>Nome Produto :</S.TitleLabel>}
             required
             rules={[{ required: true }]}>
-            <Input />
+            <InputAnt />
           </Form.Item>
           <Form.Item
             name={['tipo']}

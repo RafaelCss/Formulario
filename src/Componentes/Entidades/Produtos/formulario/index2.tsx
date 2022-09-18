@@ -4,6 +4,7 @@ import { SalvarDadosFormA } from '.';
 import { Produto } from '../../../../libs/Interfaces';
 import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
 import S from '../../../../libs/Util/Styles/style';
+import { InputAnt } from '../../../Inputs/inputTexto/style';
 export interface SalvarDadosFormB {
   salvarDados: () => Promise<void>
   limparFormulario: () => void
@@ -49,18 +50,18 @@ const FormCadastroB = forwardRef((__, ref) => {
           name={['nomeFornecedor']}
           label={<S.TitleLabel>Fornecedor :</S.TitleLabel>}
           required rules={[]}>
-          <Input />
+          <InputAnt />
         </Form.Item>
         <Form.Item
           name={['email']}
           required
           label={<S.TitleLabel>Email fornecedor :</S.TitleLabel>}>
-          <Input />
+          <InputAnt />
         </Form.Item>
         <Form.Item
           name={['telefone']}
           label={<S.TitleLabel>Telefone :</S.TitleLabel>}>
-          <Input />
+          <InputAnt />
         </Form.Item>
       </Form>
     </S.ContainerFormulario>

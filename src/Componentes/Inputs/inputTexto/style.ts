@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 export const InputAnt = styled(Input)`
-  padding: 2px;
-  border: solid 2px;
-  box-shadow: 2px 2px rgba();
+  width: 400px;
+  padding: 5px 10px;
+;
 `

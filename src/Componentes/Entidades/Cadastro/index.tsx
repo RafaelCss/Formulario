@@ -1,8 +1,10 @@
 import { Button, Form, Input, InputNumber, Select } from 'antd';
+import Router from 'next/router';
 import { useState } from 'react';
 import { CadastroUser, IUser } from '../../../libs/Interfaces';
 import { cadastroUsuario } from '../../../libs/servicos/rotas/Usuarios/cadastro';
 import S from '../../../libs/Util/Styles/style';
+import { InputAnt } from '../../Inputs/inputTexto/style';
 
 function CadastroUsuario() {
   const [erros, setErros] = useState()
@@ -11,24 +13,14 @@ function CadastroUsuario() {
   function enviarDados() {
     form.validateFields().then(async (res) => {
       const dados: CadastroUser = form.getFieldsValue(true)
-      const salvar = cadastroUsuario(dados).then(res => {
-        if (res.erros) {
-          setErros(res.erros)
-        }
+      const salvar =await cadastroUsuario(dados)
+      if(!salvar.erros){
+        setErros(salvar.erros)
+        Router.push('/')
       }
-      )
+      console.log(erros)
     })
   }
-  const validateMessages = {
-    required: '${email} is required!',
-    types: {
-      email: '${email} is not a valid email!'
-    },
-    number: {
-      range: '${label} must be between ${min} and ${max}',
-    },
-  };
-
   return (
     <S.Container>
       <S.ContainerTitulo>
@@ -36,7 +28,6 @@ function CadastroUsuario() {
       </S.ContainerTitulo>
         <Form
           form={form}
-          validateMessages={validateMessages}
           layout="vertical"
         >
           <Form.Item
@@ -46,7 +37,7 @@ function CadastroUsuario() {
             rules={[
               { message: 'Insira seu Email!' }]}
           >
-            <Input name='email' />
+            <InputAnt name='email' />
           </Form.Item>
           <Form.Item
             label={<S.TitleLabel>Nome</S.TitleLabel>}
@@ -54,7 +45,7 @@ function CadastroUsuario() {
             required
             rules={[{ message: 'Insira seu Nome!' }]}
           >
-            <Input name='nome' />
+            <InputAnt name='nome' />
           </Form.Item>
           <Form.Item
             label={<S.TitleLabel>Senha</S.TitleLabel>}

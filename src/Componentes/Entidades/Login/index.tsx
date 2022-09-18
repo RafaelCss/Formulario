@@ -5,18 +5,14 @@ import { IUser } from '../../../libs/Interfaces';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Erros, validaFormServer } from '../../../libs/Util/funcoes';
+import { InputAnt } from '../../Inputs/inputTexto/style';
 
 function FormLogin() {
   const [form] = Form.useForm()
-  const [erros, setErros] = useState<Erros[]>()
+  const [erros, setErros] = useState<Erros[] | undefined>()
   const [load, setLoad] = useState<boolean>(false)
 
-  const warning = () => {
-    message.warning('Não localizamos seus dados');
-  };
-
   function enviarDados() {
-    setErros([])
     form.validateFields().then(async (res) => {
       const dados: IUser = form.getFieldsValue(true)
       const salvar = await app.logar(dados)
@@ -32,6 +28,13 @@ function FormLogin() {
     })
   }
 
+  const senha: any = 'senha'
+  const email: any = 'email'
+  console.log('teste',erros?.[senha]?.message)
+  console.log('teste2',erros?.[email]?.message)
+  const warning = () => {
+    message.warning('Não localizamos seus dados');
+  };
 
   return (
     <Spin tip="Carregando..." spinning={load} size={'large'} delay={2}>
@@ -51,7 +54,7 @@ function FormLogin() {
               style={{ color: 'green' }}
               rules={[validaFormServer(erros)]}
             >
-              <Input name='email' />
+              <InputAnt name='email' />
             </Form.Item>
 
             <Form.Item
