@@ -3,17 +3,36 @@ import S from '../../../libs/Util/Styles/style';
 import app from '../../../libs/servicos/auth/login'
 import { IUser } from '../../../libs/Interfaces';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Erros, validaFormServer } from '../../../libs/Util/funcoes';
 import { InputAnt } from '../../Inputs/inputTexto/style';
 
 function FormLogin() {
   const [form] = Form.useForm()
-  const [erros, setErros] = useState<Erros[] | undefined>()
+  const [dados, setDados] = useState<IUser>()
+  const [erros, setErros] = useState<any>({})
   const [load, setLoad] = useState<boolean>(false)
 
+
+  function formHandleErrors(errors: any, setErrors: any): ((changedValues: any, values: any) => void) | undefined {
+    throw new Error('Function not implemented.');
+  }
+
+  const valoresInicias = useCallback(() => {
+    if (form) {
+      if (dados) {
+        form.setFieldsValue(dados)
+      }
+    }
+  }, [dados, form])
+
+  useEffect(() => {
+    valoresInicias()
+    setErros(erros)
+  }, [valoresInicias])
+
   function enviarDados() {
-    form.validateFields().then(async (res) => {
+    form.validateFields().then(async () => {
       const dados: IUser = form.getFieldsValue(true)
       const salvar = await app.logar(dados)
       setLoad(true)
@@ -21,17 +40,14 @@ function FormLogin() {
         warning()
         setLoad(false)
       }
-      if (salvar.erros) {
-        setErros(salvar.erros)
+      if (salvar?.erros) {
+        setDados(dados)
+        setErros(salvar?.erros)
         setLoad(false)
       }
     })
   }
 
-  const senha: any = 'senha'
-  const email: any = 'email'
-  console.log('teste',erros?.[senha]?.message)
-  console.log('teste2',erros?.[email]?.message)
   const warning = () => {
     message.warning('Não localizamos seus dados');
   };
@@ -46,13 +62,14 @@ function FormLogin() {
           <Form
             form={form}
             layout="vertical"
+            name={'login-user'}
+            onValuesChange={formHandleErrors(erros, setErros)}
           >
             <Form.Item
               label={<S.TitleLabel>Email</S.TitleLabel>}
               name={["email"]}
               required
-              style={{ color: 'green' }}
-              rules={[validaFormServer(erros)]}
+              rules={[validaFormServer(erros as Erros[])]}
             >
               <InputAnt name='email' />
             </Form.Item>
@@ -61,12 +78,12 @@ function FormLogin() {
               label={<S.TitleLabel>Senha</S.TitleLabel>}
               name={["senha"]}
               required
-              rules={[validaFormServer(erros)]}
+              rules={[validaFormServer(erros as Erros[])]}
             >
               <Input.Password name='senha' />
             </Form.Item>
             <S.ContainerBotao>
-              <S.BotaoPadrao onClick={() => enviarDados()}>Logar</S.BotaoPadrao>
+              <S.BotaoPadrao onClick={enviarDados}>Logar</S.BotaoPadrao>
             </S.ContainerBotao>
           </Form>
           <Space>
@@ -82,4 +99,5 @@ function FormLogin() {
 
 
 export default FormLogin;
+
 

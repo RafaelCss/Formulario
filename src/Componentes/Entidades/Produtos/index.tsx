@@ -9,7 +9,7 @@ import FormCadastroA, { SalvarDadosFormA } from './formulario/index';
 import FormCadastroB, { SalvarDadosFormB } from './formulario/index2';
 const { Step } = Steps;
 
-function HomeCadastro({usuario} : IsAuthenticate) {
+function HomeCadastro({ usuario }: IsAuthenticate) {
   const [current, setCurrent] = useState(0);
   const formCadastroA = useRef<SalvarDadosFormA>(null)
   const formCadastroB = useRef<SalvarDadosFormB>(null)
@@ -28,29 +28,27 @@ function HomeCadastro({usuario} : IsAuthenticate) {
   };
 
 
-  const submit = () => {
-    formCadastroB.current?.salvarDados().then(async () => {
-      const resposta = await cadastrarProdutos(cadastroValores as Produto).then(res => {
-        console.log(res)
-      })
-    })
+  const submit = async () => {
+    await formCadastroB.current?.salvarDados()
+    const resposta = await cadastrarProdutos(cadastroValores as Produto)
+    console.log(resposta)
   }
 
-  function limparForm (){
+  function limparForm() {
+    formCadastroA.current?.limparFormulario() ||
     formCadastroB.current?.limparFormulario()
-    formCadastroA.current?.limparFormulario()
   }
 
   const steps = [
     {
-      titulo: <p style={{color:'white'}}>Produto</p>,
+      titulo: <p style={{ color: 'white' }}>Produto</p>,
       conteudo: <FormCadastroA ref={formCadastroA} />,
       id: 1,
-      icone: <UserOutlined  />
+      icone: <UserOutlined />
 
     },
     {
-      titulo: <p style={{color:'white'}}>Fornecedor</p>,
+      titulo: <p style={{ color: 'white' }}>Fornecedor</p>,
       conteudo: <FormCadastroB ref={formCadastroB} />,
       id: 2,
       icone: <UserOutlined />
@@ -58,8 +56,8 @@ function HomeCadastro({usuario} : IsAuthenticate) {
   ];
 
   return (
-      <S.ContainerFormulario>
-        <S.ContainerNomeUsuario>Seja bem vindo {usuario} !</S.ContainerNomeUsuario>
+    <S.ContainerFormulario>
+      <S.ContainerNomeUsuario>Seja bem vindo {usuario} !</S.ContainerNomeUsuario>
       <>
         <div style={{ display: 'flex', width: '100%', padding: '10px', justifyContent: 'space-evenly', alignItems: 'center' }}>
           <Steps current={current}>
@@ -76,7 +74,7 @@ function HomeCadastro({usuario} : IsAuthenticate) {
                 <Button type="primary" onClick={() => next()}>
                   Continuar
                 </Button>
-                <Button type="primary" onClick={()=>limparForm()}>
+                <Button type="primary" onClick={() => limparForm()}>
                   Cancelar
                 </Button>
               </>
@@ -90,7 +88,7 @@ function HomeCadastro({usuario} : IsAuthenticate) {
                 <Button type="primary" onClick={() => submit()}>
                   Cadastrar
                 </Button>
-                <Button danger onClick={()=>limparForm()}>
+                <Button danger onClick={() => limparForm()}>
                   Cancelar
                 </Button>
               </>
@@ -98,7 +96,7 @@ function HomeCadastro({usuario} : IsAuthenticate) {
           </Space>
         </div>
       </>
-      </S.ContainerFormulario>
+    </S.ContainerFormulario>
   )
 }
 

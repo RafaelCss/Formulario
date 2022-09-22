@@ -17,7 +17,7 @@ const FormCadastroB = forwardRef((__, ref) => {
 
   const inicialValues = useCallback(() => {
     form.setFieldsValue(cadastroValores)
-  }, [cadastroValores])
+  }, [cadastroValores, form])
 
   useImperativeHandle(ref, () => ({
     salvarDados: async () => {
@@ -29,13 +29,13 @@ const FormCadastroB = forwardRef((__, ref) => {
         alert(err)
       })
     },
-    limparFormulario: () => limparFormulario()
+    limparFormulario: () => {
+      formCadastroA.current?.limparFormulario()
+      form.resetFields()
+    }
   }))
 
-  function limparFormulario() {
-    formCadastroA.current?.limparFormulario()
-    form.resetFields()
-  }
+
   return (
     <S.ContainerFormulario>
       <Form
