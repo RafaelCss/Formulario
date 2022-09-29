@@ -1,5 +1,5 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Button, Space, Steps } from 'antd';
+import { Button, Modal, Space, Steps } from 'antd';
 import { useContext, useRef, useState } from 'react';
 import { IsAuthenticate, Produto } from '../../../libs/Interfaces';
 import { CadastroContext } from '../../../libs/servicos/ContextoCadastro';
@@ -9,6 +9,10 @@ import FormCadastroA, { SalvarDadosFormA } from './formulario/index';
 import FormCadastroB, { SalvarDadosFormB } from './formulario/index2';
 const { Step } = Steps;
 
+type Resposta<T> = {
+  id: string
+  mensagem: string
+}
 function HomeCadastro({ usuario }: IsAuthenticate) {
   const [current, setCurrent] = useState(0);
   const formCadastroA = useRef<SalvarDadosFormA>(null)
@@ -30,12 +34,20 @@ function HomeCadastro({ usuario }: IsAuthenticate) {
 
   const submit = async () => {
     await formCadastroB.current?.salvarDados()
-    const resposta = await cadastrarProdutos(cadastroValores as Produto)
+    const resposta: Resposta<Produto> = await cadastrarProdutos(cadastroValores as Produto)
     console.log(resposta)
+    if (resposta.id) {
+      Modal.info({
+        title: resposta.mensagem,
+        onOk() {
+          limparForm()
+         },
+      });
+    }
   }
 
   function limparForm() {
-    formCadastroA.current?.limparFormulario() ||
+    formCadastroA.current?.limparFormulario()
     formCadastroB.current?.limparFormulario()
   }
 

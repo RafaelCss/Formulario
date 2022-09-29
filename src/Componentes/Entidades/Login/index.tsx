@@ -1,4 +1,4 @@
-import { Form, Input, message, Space, Spin } from 'antd';
+import { Form, Input, message, Space, Spin, Modal } from 'antd';
 import S from '../../../libs/Util/Styles/style';
 import app from '../../../libs/servicos/auth/login'
 import { IUser } from '../../../libs/Interfaces';
@@ -12,11 +12,6 @@ function FormLogin() {
   const [dados, setDados] = useState<IUser>()
   const [erros, setErros] = useState<any>({})
   const [load, setLoad] = useState<boolean>(false)
-
-
-  function formHandleErrors(errors: any, setErrors: any): ((changedValues: any, values: any) => void) | undefined {
-    throw new Error('Function not implemented.');
-  }
 
   const valoresInicias = useCallback(() => {
     if (form) {
@@ -63,7 +58,6 @@ function FormLogin() {
             form={form}
             layout="vertical"
             name={'login-user'}
-            onValuesChange={formHandleErrors(erros, setErros)}
           >
             <Form.Item
               label={<S.TitleLabel>Email</S.TitleLabel>}

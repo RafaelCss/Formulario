@@ -1,6 +1,5 @@
-import { Button, Form, Input, InputNumber, Select } from 'antd';
+import {Form, Input, Select } from 'antd';
 import { useCallback, useContext, forwardRef, useImperativeHandle } from 'react';
-import { Produto } from '../../../../libs/Interfaces';
 import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
 import S from '../../../../libs/Util/Styles/style';
 import { InputAnt } from '../../../Inputs/inputTexto/style';
