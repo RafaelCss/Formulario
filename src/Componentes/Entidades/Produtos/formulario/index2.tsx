@@ -1,5 +1,5 @@
 import { Button, Form, Input } from 'antd';
-import { forwardRef, useCallback, useContext, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useCallback, useContext, useEffect, useImperativeHandle, useRef } from 'react';
 import { SalvarDadosFormA } from '.';
 import { Produto } from '../../../../libs/Interfaces';
 import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
@@ -19,6 +19,9 @@ const FormCadastroB = forwardRef((__, ref) => {
     form.setFieldsValue(cadastroValores)
   }, [cadastroValores, form])
 
+  useEffect(()=>{
+    inicialValues()
+  },[inicialValues])
   useImperativeHandle(ref, () => ({
     salvarDados: async () => {
       await form.validateFields().then(async (res) => {
@@ -30,7 +33,6 @@ const FormCadastroB = forwardRef((__, ref) => {
       })
     },
     limparFormulario: () => {
-      formCadastroA.current?.limparFormulario()
       form.resetFields()
     }
   }))

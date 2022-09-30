@@ -35,19 +35,22 @@ function HomeCadastro({ usuario }: IsAuthenticate) {
   const submit = async () => {
     await formCadastroB.current?.salvarDados()
     const resposta: Resposta<Produto> = await cadastrarProdutos(cadastroValores as Produto)
-    console.log(resposta)
     if (resposta.id) {
       Modal.info({
         title: resposta.mensagem,
         onOk() {
-          limparForm()
+          limparFormA()
+          limparFormB()
          },
       });
     }
   }
 
-  function limparForm() {
+  function limparFormA() {
     formCadastroA.current?.limparFormulario()
+  }
+
+  function limparFormB() {
     formCadastroB.current?.limparFormulario()
   }
 
@@ -86,7 +89,7 @@ function HomeCadastro({ usuario }: IsAuthenticate) {
                 <Button type="primary" onClick={() => next()}>
                   Continuar
                 </Button>
-                <Button type="primary" onClick={() => limparForm()}>
+                <Button type="primary" onClick={() => limparFormA()}>
                   Cancelar
                 </Button>
               </>
@@ -100,7 +103,7 @@ function HomeCadastro({ usuario }: IsAuthenticate) {
                 <Button type="primary" onClick={() => submit()}>
                   Cadastrar
                 </Button>
-                <Button danger onClick={() => limparForm()}>
+                <Button danger onClick={() => limparFormB()}>
                   Cancelar
                 </Button>
               </>

@@ -1,5 +1,5 @@
-import {Form, Input, Select } from 'antd';
-import { useCallback, useContext, forwardRef, useImperativeHandle } from 'react';
+import { Form, Input, Select } from 'antd';
+import { useCallback, useContext, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { CadastroContext } from '../../../../libs/servicos/ContextoCadastro';
 import S from '../../../../libs/Util/Styles/style';
 import { InputAnt } from '../../../Inputs/inputTexto/style';
@@ -15,11 +15,17 @@ const FormCadastroA = forwardRef((__, ref) => {
   const [form] = Form.useForm()
 
   const inicialValues = useCallback(() => {
-    if (form) {
-      form.setFieldsValue(cadastroValores)
+    if (cadastroValores) {
+      if (form) {
+        form.setFieldsValue(cadastroValores)
+      }
     }
     form.resetFields()
   }, [cadastroValores, form])
+
+  useEffect(() => {
+    inicialValues()
+  }, [inicialValues])
 
   useImperativeHandle(ref, () => ({
     salvarDados: async () => {
