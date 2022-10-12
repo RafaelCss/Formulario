@@ -7,6 +7,7 @@ import { cadastrarProdutos } from '../../../libs/servicos/rotas/Produtos/cadastr
 import S from "../../../libs/Util/Styles/style";
 import FormCadastroA, { SalvarDadosFormA } from './formulario/index';
 import FormCadastroB, { SalvarDadosFormB } from './formulario/index2';
+import Router from 'next/router';
 const { Step } = Steps;
 
 type Resposta<T> = {
@@ -43,10 +44,12 @@ function HomeCadastro({ usuario }: IsAuthenticate) {
           limparFormB()
          },
       });
+
     }
   }
 
   function limparFormA() {
+    Router.push('/tabela')
     formCadastroA.current?.limparFormulario()
   }
 
