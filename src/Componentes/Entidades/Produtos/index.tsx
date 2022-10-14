@@ -41,7 +41,6 @@ function HomeCadastro({ usuario }: IsAuthenticate) {
         title: resposta.mensagem,
         onOk() {
           limparFormA()
-          limparFormB()
          },
       });
 
