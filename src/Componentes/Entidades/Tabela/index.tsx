@@ -49,7 +49,6 @@ function TabelaProdutos() {
     },
   });
 
-
   async function buscarProdutos() {
     setLoading(true);
     const produtos = await  buscarProdutos().then(res => setData(res))
