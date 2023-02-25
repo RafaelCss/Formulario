@@ -16,13 +16,13 @@ Formulário de cadastro de usuários e de produtos diversos.
 }
 ```
 ### Cadastro de produtos
-
+```
 {
     "nome": "Nome do produto",
     "preco": "Preço do produto",
     "descricao": "Descrição do produto"
 }
-
+```
 
 
 ### . Passo a passo para a implantação do projeto no firebase hosting
